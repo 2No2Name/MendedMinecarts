@@ -1,7 +1,7 @@
-package net.fabricmc.example.mixin;
+package cartmod.mixin;
 
+import cartmod.CartModSettingCommand;
 import com.mojang.brigadier.CommandDispatcher;
-import net.fabricmc.example.CartModSettingCommand;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
