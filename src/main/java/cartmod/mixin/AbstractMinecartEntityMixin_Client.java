@@ -1,6 +1,6 @@
-package net.fabricmc.example.mixin;
+package cartmod.mixin;
 
-import net.fabricmc.example.ExampleMod;
+import cartmod.CartMod;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,7 +27,7 @@ public class AbstractMinecartEntityMixin_Client {
 	private boolean simulateCartOnClient(World instance) {
 		if (instance.isClient) {
 			//false => do simulation
-			return !ExampleMod.ACCURATE_CLIENT_MINECARTS.isEnabled();
+			return !CartMod.ACCURATE_CLIENT_MINECARTS.isEnabled();
 		}
 		return instance.isClient;
 	}

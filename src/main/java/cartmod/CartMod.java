@@ -1,14 +1,14 @@
-package net.fabricmc.example;
+package cartmod;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.example.settings.Setting;
+import cartmod.settings.Setting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExampleMod implements ModInitializer {
+public class CartMod implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.

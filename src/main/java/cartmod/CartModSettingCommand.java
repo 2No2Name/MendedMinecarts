@@ -1,11 +1,12 @@
-package net.fabricmc.example;
+package cartmod;
 
+import cartmod.settings.Setting;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import net.fabricmc.example.settings.Setting;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 
 /**
@@ -19,10 +20,10 @@ public class CartModSettingCommand
      */
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher)
     {
-        LiteralArgumentBuilder<ServerCommandSource> literalargumentbuilder = CommandManager.literal(ExampleMod.SETTING_COMMAND).executes((context)
+        LiteralArgumentBuilder<ServerCommandSource> literalargumentbuilder = CommandManager.literal(CartMod.SETTING_COMMAND).executes((context)
          -> listSettings(context.getSource()));
 
-        for (Setting setting : ExampleMod.SETTINGS)
+        for (Setting setting : CartMod.SETTINGS)
         {
             literalargumentbuilder.
                     then((CommandManager.literal(setting.name).executes(commandContext -> {
@@ -40,8 +41,8 @@ public class CartModSettingCommand
 
     private static int listSettings(ServerCommandSource source)
     {
-        source.sendFeedback(Text.literal("Available Settings:"), false);
-        for (Setting setting : ExampleMod.SETTINGS)
+        source.sendFeedback(new LiteralText("Available Settings:"), false);
+        for (Setting setting : CartMod.SETTINGS)
         {
             source.sendFeedback(getPrintedCommand(setting), false);
         }
@@ -49,7 +50,7 @@ public class CartModSettingCommand
     }
 
     private static Text getPrintedCommand(Setting setting) {
-        return Text.literal(String.valueOf(setting));
+        return new LiteralText(String.valueOf(setting));
     }
 
 }

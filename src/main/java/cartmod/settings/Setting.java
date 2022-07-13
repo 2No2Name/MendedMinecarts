@@ -1,4 +1,4 @@
-package net.fabricmc.example.settings;
+package cartmod.settings;
 
 public class Setting {
     public final String name;
