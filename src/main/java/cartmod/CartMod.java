@@ -23,7 +23,8 @@ public class CartMod implements ModInitializer {
 		return setting;
 	}
 
-	public static Setting ACCURATE_CLIENT_MINECARTS = addSetting(new Setting("AccurateClientMinecarts", true));
+	public static Setting ACCURATE_CLIENT_MINECARTS = addSetting(new Setting("AccurateClientMinecarts", false));
+	public static Setting ALWAYS_SEND_CART_POSITION = addSetting(new Setting("AlwaysSendCartPosition", false));
 
 	@Override
 	public void onInitialize() {
