@@ -28,6 +28,6 @@
   ],
 
   "depends": {
-    "fabric": "*"
+    "fabricloader": "*"
   }
 }
