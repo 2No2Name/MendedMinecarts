@@ -24,7 +24,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "cartmod.mixins.json"
   ],
 
   "depends": {
