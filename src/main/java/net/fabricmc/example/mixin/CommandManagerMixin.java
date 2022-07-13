@@ -1,7 +1,8 @@
-package cartmod.mixin;
+package net.fabricmc.example.mixin;
 
 import com.mojang.brigadier.CommandDispatcher;
-import cartmod.CartModSettingCommand;
+import net.fabricmc.example.CartModSettingCommand;
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import org.spongepowered.asm.mixin.Final;
@@ -20,7 +21,7 @@ public abstract class CommandManagerMixin
     private CommandDispatcher<ServerCommandSource> dispatcher;
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void registerCommands(CommandManager.RegistrationEnvironment environment, CallbackInfo ci) {
+    private void registerCommands(CommandManager.RegistrationEnvironment environment, CommandRegistryAccess commandRegistryAccess, CallbackInfo ci) {
         CartModSettingCommand.register(this.dispatcher);
     }
 }

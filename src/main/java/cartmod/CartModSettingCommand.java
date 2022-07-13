@@ -6,7 +6,6 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 
 /**
@@ -41,7 +40,7 @@ public class CartModSettingCommand
 
     private static int listSettings(ServerCommandSource source)
     {
-        source.sendFeedback(new LiteralText("Available Settings:"), false);
+        source.sendFeedback(Text.literal("Available Settings:"), false);
         for (Setting setting : CartMod.SETTINGS)
         {
             source.sendFeedback(getPrintedCommand(setting), false);
@@ -50,7 +49,7 @@ public class CartModSettingCommand
     }
 
     private static Text getPrintedCommand(Setting setting) {
-        return new LiteralText(String.valueOf(setting));
+        return Text.literal(String.valueOf(setting));
     }
 
 }
