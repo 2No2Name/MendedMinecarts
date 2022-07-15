@@ -1,6 +1,8 @@
 package cartmod.settings;
 
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 
 public class Setting {
     public final String name;
@@ -24,7 +26,7 @@ public class Setting {
     }
 
     public Text asText() {
-        return Text.literal(name).append(": ").append(Text.literal(String.valueOf(state))).append(" ").append(Text.translatable("cartmod.default")).append(" ").append(String.valueOf(defaultState));
+        return new LiteralText(name).append(": ").append(new LiteralText(String.valueOf(state))).append(" ").append(new TranslatableText("cartmod.default")).append(" ").append(String.valueOf(defaultState));
     }
 
     public Text getDescription() {

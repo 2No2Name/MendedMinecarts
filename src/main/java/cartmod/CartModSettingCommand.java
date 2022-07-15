@@ -7,6 +7,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 
 /**
  * Class for the /counter command which allows to use hoppers pointing into wool
@@ -40,7 +41,7 @@ public class CartModSettingCommand
 
     private static int listSettings(ServerCommandSource source)
     {
-        source.sendFeedback(Text.translatable("cartmod.available_settings"), false);
+        source.sendFeedback(new TranslatableText("cartmod.available_settings"), false);
         for (Setting setting : CartMod.SETTINGS)
         {
             source.sendFeedback(setting.asText(), false);
