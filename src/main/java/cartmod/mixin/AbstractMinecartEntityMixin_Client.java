@@ -44,11 +44,11 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 			cancellable = true
 	)
 	private void setCartPosLikeOtherEntities(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate, CallbackInfo ci) {
-		if (this.world.isClient && CartMod.ACCURATE_CLIENT_MINECARTS.isEnabled()) {
+		if (this.world.isClient && CartMod.NO_CLIENT_CART_INTERPOLATION.isEnabled()) {
 			ci.cancel();
 			super.updateTrackedPositionAndAngles(x, y, z, yaw, pitch, interpolationSteps, interpolate);
 		}
-		this.displayData = new MinecartDisplayData(this.getType().getDimensions().getBoxAt(x, y, z));
+		this.displayData = new MinecartDisplayData(this.getType().getDimensions().getBoxAt(x, y, z), (AbstractMinecartEntity) (Object) this);
 	}
 
 	@Override
