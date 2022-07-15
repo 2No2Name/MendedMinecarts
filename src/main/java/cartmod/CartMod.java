@@ -2,6 +2,7 @@ package cartmod;
 
 import net.fabricmc.api.ModInitializer;
 import cartmod.settings.Setting;
+import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,8 +24,11 @@ public class CartMod implements ModInitializer {
 		return setting;
 	}
 
-	public static Setting ACCURATE_CLIENT_MINECARTS = addSetting(new Setting("AccurateClientMinecarts", false));
-	public static Setting ALWAYS_SEND_CART_POSITION = addSetting(new Setting("AlwaysSendCartPosition", false));
+	public static Setting ACCURATE_CLIENT_MINECARTS = addSetting(new Setting("AccurateClientMinecarts", false, Text.translatable("cartmod.accurate_client_minecarts.description")));
+	public static Setting ALWAYS_SYNC_CART_POSITION = addSetting(new Setting("AlwaysSyncCartPosition", false, Text.translatable("cartmod.always_sync_cart_position.description")));
+	public static Setting DISPLAY_CART_POSITION = addSetting(new Setting("DisplayCartPosition", false, Text.translatable("cartmod.display_cart_position.description")));
+	public static Setting DISPLAY_CART_DATA = addSetting(new Setting("DisplayCartData", false, Text.translatable("cartmod.display_cart_data.description")));
+	//Issue: Needs client side code
 
 	@Override
 	public void onInitialize() {

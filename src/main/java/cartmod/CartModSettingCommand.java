@@ -26,7 +26,7 @@ public class CartModSettingCommand
         {
             literalargumentbuilder.
                     then((CommandManager.literal(setting.name).executes(commandContext -> {
-                        commandContext.getSource().sendFeedback(getPrintedCommand(setting), false);
+                        commandContext.getSource().sendFeedback(setting.asText(), false);
                         return 1;
                     })));
             literalargumentbuilder.then(CommandManager.literal(setting.name).
@@ -40,16 +40,13 @@ public class CartModSettingCommand
 
     private static int listSettings(ServerCommandSource source)
     {
-        source.sendFeedback(Text.literal("Available Settings:"), false);
+        source.sendFeedback(Text.translatable("cartmod.available_settings"), false);
         for (Setting setting : CartMod.SETTINGS)
         {
-            source.sendFeedback(getPrintedCommand(setting), false);
+            source.sendFeedback(setting.asText(), false);
+            source.sendFeedback(setting.getDescription(), false);
         }
         return 1;
-    }
-
-    private static Text getPrintedCommand(Setting setting) {
-        return Text.literal(String.valueOf(setting));
     }
 
 }
