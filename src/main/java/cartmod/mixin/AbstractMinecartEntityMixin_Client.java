@@ -28,8 +28,8 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 	}
 
 	@Redirect(
-			at = @At(value = "FIELD", target = "Lnet/minecraft/world/World;isClient:Z"),
-			method = "tick")
+			method = "tick",
+			at = @At(value = "FIELD", target = "Lnet/minecraft/world/World;isClient:Z"))
 	private boolean simulateCartsOnClientLikeOnServer(World instance) {
 		if (instance.isClient) {
 			//false => do simulation
