@@ -1,0 +1,14 @@
+{
+  "cartmod.available_settings": "Available Settings:",
+  "cartmod.default_setting": "default:",
+  "cartmod.accurate_client_minecarts.description": "Runs the same minecart movement code on the client as on the server. Currently only in singleplayer worlds.",
+  "cartmod.no_cart_interpolation.description": "Disables the client interpolation capability. Instead position packets set the client side cart position like with other entities.",
+  "cartmod.always_sync_cart_position.description": "Server sends the minecart position to the client every tick.",
+  "cartmod.display_cart_position.description": "Client displays the last received minecart position.",
+  "cartmod.display_cart_data.description": "Client displays information above minecarts.",
+  "cartmod.derailing_cart_fix.description": "Carts do not derail anymore.",
+  "cartmod.default": "default: ",
+  "cartmod.pos": "Pos",
+  "cartmod.velocity": "Speed",
+  "cartmod.onGround": "OnGround"
+}

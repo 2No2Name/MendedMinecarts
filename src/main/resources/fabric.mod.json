@@ -15,7 +15,7 @@
   },
 
   "license": "",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/cartmod/icon.png",
 
   "environment": "*",
   "entrypoints": {

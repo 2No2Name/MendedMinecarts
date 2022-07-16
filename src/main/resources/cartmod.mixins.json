@@ -8,8 +8,10 @@
     "AbstractMinecartEntityMixin_Physics",
     "BlocksMixin",
     "CommandManagerMixin",
+    "DataQueryHandlerMixin",
     "EntityShapeContextAccessor",
     "EntityTrackerEntryMixin",
+    "MinecartEntityRendererMixin",
     "RailBlockMixin"
   ],
   "client": [

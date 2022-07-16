@@ -3,11 +3,11 @@ package cartmod.mixin;
 import cartmod.AbstractMinecartEntityAccess;
 import cartmod.CartMod;
 import cartmod.MinecartDisplayData;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
-import net.minecraft.util.math.Box;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,13 +39,13 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 		return false;
 	}
 
-	@Inject(
-			method = "setVelocityClient",
-			at = @At("HEAD")
-	)
-	private void rememberCartVelocity(double x, double y, double z, CallbackInfo ci) {
-		this.displayData = MinecartDisplayData.withVelocity(this, new Vec3d(x,y,z));
-	}
+//	@Inject(
+//			method = "setVelocityClient",
+//			at = @At("HEAD")
+//	)
+//	private void rememberCartVelocity(double x, double y, double z, CallbackInfo ci) {
+//		this.displayData = MinecartDisplayData.withVelocity(this, new Vec3d(x,y,z));
+//	}
 
 	@Inject(
 			method = "updateTrackedPositionAndAngles(DDDFFIZ)V",
@@ -57,7 +57,21 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 			ci.cancel();
 			super.updateTrackedPositionAndAngles(x, y, z, yaw, pitch, interpolationSteps, interpolate);
 		}
-		this.displayData = MinecartDisplayData.withBox(this, this.getType().getDimensions().getBoxAt(x, y, z));
+//		this.displayData = MinecartDisplayData.withPos(this, new Vec3d(x, y, z));
+	}
+
+	@Inject(
+			method = "tick",
+			at = @At("HEAD")
+	)
+	private void updateDisplayInfo(CallbackInfo ci) {
+		if ((CartMod.DISPLAY_CART_POSITION.isEnabled() || CartMod.DISPLAY_CART_DATA.isEnabled()) && this.world.isClient && MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.hasPermissionLevel(2)) {
+			MinecraftClient.getInstance().player.networkHandler.getDataQueryHandler().queryEntityNbt(this.getId(), nbt -> {
+				this.displayData = MinecartDisplayData.fromNBT(this, nbt);
+			});
+		} else if (this.world.isClient()){
+			this.displayData = null;
+		}
 	}
 
 	@Override

@@ -23,11 +23,11 @@ public abstract class WorldRendererMixin_Client {
             at = @At("HEAD")
     )
     private <E extends Entity> void renderMinecartInfo(Entity entity, double cameraX, double cameraY, double cameraZ, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, CallbackInfo ci) {
-        if ((CartMod.DISPLAY_CART_POSITION.isEnabled() || CartMod.DISPLAY_CART_DATA.isEnabled()) && entity instanceof AbstractMinecartEntityAccess entityAccess) {
+        if ((CartMod.DISPLAY_CART_POSITION.isEnabled()) && entity instanceof AbstractMinecartEntityAccess entityAccess) {
             MinecartDisplayData displayInfo = entityAccess.getDisplayInfo();
             if (displayInfo != null) {
                 Box box = displayInfo.lastReceivedPosBox();
-                if (box != null && CartMod.DISPLAY_CART_POSITION.isEnabled()) {
+                if (box != null) {
                     matrices.push();
                     matrices.translate(-cameraX, -cameraY, -cameraZ);
                     VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getLines());
