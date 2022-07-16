@@ -24,7 +24,7 @@ public record MinecartDisplayData(Box lastReceivedPosBox, Vec3d velocity, Abstra
         if (displayInfo == null) {
             return new MinecartDisplayData(boxAt, null, (AbstractMinecartEntity) entity);
         } else {
-            return new MinecartDisplayData(displayInfo.lastReceivedPosBox, displayInfo.velocity, (AbstractMinecartEntity) entity);
+            return new MinecartDisplayData(boxAt, displayInfo.velocity, (AbstractMinecartEntity) entity);
         }
     }
 }
