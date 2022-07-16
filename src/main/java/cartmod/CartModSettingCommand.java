@@ -1,12 +1,12 @@
 package cartmod;
 
+import cartmod.settings.BooleanSetting;
 import cartmod.settings.Setting;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
 /**
@@ -23,21 +23,12 @@ public class CartModSettingCommand
         LiteralArgumentBuilder<ServerCommandSource> literalargumentbuilder = CommandManager.literal(CartMod.SETTING_COMMAND).executes((context)
          -> listSettings(context.getSource()));
 
-        for (Setting setting : CartMod.SETTINGS)
-        {
-            literalargumentbuilder.
-                    then((CommandManager.literal(setting.name).executes(commandContext -> {
-                        commandContext.getSource().sendFeedback(setting.asText(), false);
-                        return 1;
-                    })));
-            literalargumentbuilder.then(CommandManager.literal(setting.name).
-                    then(CommandManager.argument("enabled", BoolArgumentType.bool()).executes((context) -> {
-                        setting.setEnabled(context.getArgument("enabled", Boolean.class));
-                        return 1;
-                    })));
+        for (Setting setting : CartMod.SETTINGS) {
+            setting.buildCommand(literalargumentbuilder);
         }
         dispatcher.register(literalargumentbuilder);
     }
+
 
     private static int listSettings(ServerCommandSource source)
     {

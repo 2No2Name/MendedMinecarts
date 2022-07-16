@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractBlockSettingAccessor",
-    "AbstractMinecartEntityMixin_Physics",
+    "AbstractMinecartEntityMixin_ConfiguredSpeed",
+    "AbstractMinecartEntityMixin_DerailFix",
     "BlocksMixin",
     "CommandManagerMixin",
     "DataQueryHandlerMixin",

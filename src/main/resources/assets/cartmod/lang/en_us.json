@@ -10,5 +10,6 @@
   "cartmod.default": "default: ",
   "cartmod.pos": "Pos",
   "cartmod.velocity": "Speed",
-  "cartmod.onGround": "OnGround"
+  "cartmod.onGround": "OnGround",
+  "cartmod.custom_cart_speed.description": "Sets minecarts to a custom speed limit when on rails."
 }

@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractMinecartEntity.class)
-public abstract class AbstractMinecartEntityMixin_Physics extends Entity implements AbstractMinecartEntityAccess_Physics {
+public abstract class AbstractMinecartEntityMixin_DerailFix extends Entity implements AbstractMinecartEntityAccess_Physics {
 
     private boolean isMovingOnRail;
 
-    public AbstractMinecartEntityMixin_Physics(EntityType<?> type, World world) {
+    public AbstractMinecartEntityMixin_DerailFix(EntityType<?> type, World world) {
         super(type, world);
     }
 
