@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -39,6 +40,14 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 	}
 
 	@Inject(
+			method = "setVelocityClient",
+			at = @At("HEAD")
+	)
+	private void rememberCartVelocity(double x, double y, double z, CallbackInfo ci) {
+		this.displayData = MinecartDisplayData.withVelocity(this, new Vec3d(x,y,z));
+	}
+
+	@Inject(
 			method = "updateTrackedPositionAndAngles(DDDFFIZ)V",
 			at = @At("HEAD"),
 			cancellable = true
@@ -48,7 +57,7 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 			ci.cancel();
 			super.updateTrackedPositionAndAngles(x, y, z, yaw, pitch, interpolationSteps, interpolate);
 		}
-		this.displayData = new MinecartDisplayData(this.getType().getDimensions().getBoxAt(x, y, z), (AbstractMinecartEntity) (Object) this);
+		this.displayData = MinecartDisplayData.withBox(this, this.getType().getDimensions().getBoxAt(x, y, z));
 	}
 
 	@Override

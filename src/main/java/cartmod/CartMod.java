@@ -30,7 +30,9 @@ public class CartMod implements ModInitializer {
 	public static Setting ALWAYS_SYNC_CART_POSITION = addSetting(new Setting("AlwaysSyncCartPosition", false, new TranslatableText("cartmod.always_sync_cart_position.description")));
 	public static Setting DISPLAY_CART_POSITION = addSetting(new Setting("DisplayCartPosition", false, new TranslatableText("cartmod.display_cart_position.description")));
 	public static Setting DISPLAY_CART_DATA = addSetting(new Setting("DisplayCartData", false, new TranslatableText("cartmod.display_cart_data.description")));
-	//Issue: Needs client side code
+
+	public static Setting DERAILING_CART_FIX = addSetting(new Setting("DerailingCartFix", false, new TranslatableText("cartmod.derailing_cart_fix.description")));
+	//todo Issue: Needs client side code for client side rules
 
 	@Override
 	public void onInitialize() {

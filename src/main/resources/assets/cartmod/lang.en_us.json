@@ -6,5 +6,6 @@
   "cartmod.always_sync_cart_position.description":  "Server sends the minecart position to the client every tick.",
   "cartmod.display_cart_position.description":  "Client displays the last received minecart position.",
   "cartmod.display_cart_data.description":  "Client displays information above minecarts.",
+  "cartmod.derailing_cart_fix.description":  "Carts do not derail anymore.",
   "cartmod.default":  "default: "
 }

@@ -4,14 +4,17 @@
   "package": "cartmod.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractBlockSettingAccessor",
     "AbstractMinecartEntityMixin_Physics",
-    "AbstractMinecartEntityMixin_Server",
+    "BlocksMixin",
     "CommandManagerMixin",
-    "EntityTrackerEntryMixin"
+    "EntityShapeContextAccessor",
+    "EntityTrackerEntryMixin",
+    "RailBlockMixin"
   ],
   "client": [
     "AbstractMinecartEntityMixin_Client",
-    "EntityRenderDispatcherMixin_Client"
+    "WorldRendererMixin_Client"
   ],
   "injectors": {
     "defaultRequire": 1

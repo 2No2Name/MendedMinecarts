@@ -26,6 +26,7 @@ public class EntityTrackerEntryMixin {
     )
     private long getDeltaX_alwaysTriggerCondition(double coord) {
         if (CartMod.ALWAYS_SYNC_CART_POSITION.isEnabled() && this.entity instanceof AbstractMinecartEntity) {
+            this.entity.velocityModified = true;
             return Long.MAX_VALUE;
         }
 //        return instance.getDeltaX(pos); 1.19
