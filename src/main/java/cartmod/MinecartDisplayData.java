@@ -116,7 +116,7 @@ public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d veloc
         if (this.fillLevel == -1) {
             return Optional.empty();
         }
-        return Optional.of(new TranslatableText("cartmod.fillLevel").append(": ").append(String.valueOf(this.fillLevel)));
+        return Optional.of(new TranslatableText("cartmod.fill_level").append(": ").append(String.valueOf(this.fillLevel)));
     }
 
     public ArrayList<Text> getInfoTexts() {

@@ -52,7 +52,7 @@ public class BooleanSettingGroup extends BooleanSetting {
     public LiteralArgumentBuilder<ServerCommandSource> buildCommand() {
         LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal(this.name).executes(commandContext -> {
             commandContext.getSource().sendFeedback(this.asText(), false);
-            commandContext.getSource().sendFeedback(this.getDefault(), false);
+            listChildren(commandContext.getSource(), this.children);
             return 1;
         });
 

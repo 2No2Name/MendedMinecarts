@@ -11,5 +11,22 @@
   "cartmod.pos": "Pos",
   "cartmod.velocity": "Speed",
   "cartmod.onGround": "OnGround",
-  "cartmod.custom_cart_speed.description": "Sets minecarts to a custom speed limit when on rails."
+  "cartmod.custom_cart_speed.description": "Sets minecarts to a custom speed limit when on rails.",
+  "cartmod.estimated_distance": "Est.Distance",
+  "cartmod.blocks_distance": "m",
+  "cartmod.slowdown_rate": "Slowdown",
+  "cartmod.fill_level": "Signal Strength",
+  "cartmod.in_water": "In water",
+  "cartmod.display_cart_data.position.description": "Displays the coordinates above minecarts.",
+  "cartmod.display_cart_data.velocity.description": "Displays the velocity vector above minecarts.",
+  "cartmod.display_cart_data.speed.description": "Displays the absolute velocity above minecarts.",
+  "cartmod.display_cart_data.fill_level.description": "Displays the fill level of storage minecarts above them.",
+  "cartmod.display_cart_data.on_ground.description": "Displays whether minecarts are on ground above them",
+  "cartmod.display_cart_data.in_water.description": "Displays whether minecarts are touching water (client side)",
+  "cartmod.display_cart_data.slowdown_rate.description": "Displays the slowdown rate of minecarts (client side)",
+  "cartmod.display_cart_data.estimated_distance.description": "Displays an estimate of the distance the minecart can travel with the current velocity and slowdown rate",
+  "cartmod.derailing_cart_fix_demo.description": "Prevents minecarts from derailing",
+  "cartmod.rotate_cart_to_rail.description": "Rotates minecarts on non-curved rails to fix unexpected pushing behavior of minecarts",
+  "cartmod.blocks_per_second": "m/s",
+  "cartmod.unknown": "unknown"
 }
