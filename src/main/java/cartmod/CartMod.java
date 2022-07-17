@@ -1,9 +1,9 @@
 package cartmod;
 
+import cartmod.settings.BooleanSetting;
 import cartmod.settings.DoubleSetting;
 import cartmod.settings.Setting;
 import net.fabricmc.api.ModInitializer;
-import cartmod.settings.BooleanSetting;
 import net.minecraft.text.TranslatableText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,9 +32,10 @@ public class CartMod implements ModInitializer {
 	public static BooleanSetting ALWAYS_SYNC_CART_POSITION = addSetting(new BooleanSetting("AlwaysSyncCartPosition", false, new TranslatableText("cartmod.always_sync_cart_position.description")));
 	public static BooleanSetting DISPLAY_CART_POSITION = addSetting(new BooleanSetting("DisplayCartPosition", false, new TranslatableText("cartmod.display_cart_position.description")));
 	public static BooleanSetting DISPLAY_CART_DATA = addSetting(new BooleanSetting("DisplayCartData", false, new TranslatableText("cartmod.display_cart_data.description")));
-	public static DoubleSetting CUSTOM_RAIL_SPEED = addSetting(new DoubleSetting("CartSpeed", 8d/20d, new TranslatableText("cartmod.custom_cart_speed.description")));
+	public static DoubleSetting CUSTOM_RAIL_SPEED = addSetting(new DoubleSetting("CartSpeed", 8d / 20d, new TranslatableText("cartmod.custom_cart_speed.description")));
 	public static BooleanSetting DERAILING_CART_FIX = addSetting(new BooleanSetting("DerailingCartFix", false, new TranslatableText("cartmod.derailing_cart_fix.description")));
 	public static BooleanSetting DERAILING_CART_FIX_DEMO = addSetting(new BooleanSetting("DerailingCartFixDemo", false, new TranslatableText("cartmod.derailing_cart_fix_demo.description")));
+	public static BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, new TranslatableText("cartmod.rotate_cart_to_rail.description")));
 	//todo Issue: Needs client side code for client side rules
 
 	@Override

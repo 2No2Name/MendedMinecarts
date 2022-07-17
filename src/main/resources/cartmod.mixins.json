@@ -7,6 +7,7 @@
     "AbstractBlockSettingAccessor",
     "AbstractMinecartEntityMixin_ConfiguredSpeed",
     "AbstractMinecartEntityMixin_DerailFix",
+    "AbstractMinecartEntityMixin_YawFix",
     "AbstractRailBlockMixin",
     "BlocksMixin",
     "CommandManagerMixin",

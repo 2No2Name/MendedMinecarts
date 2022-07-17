@@ -118,4 +118,14 @@ public class RailHitboxHelper {
         return railShape == RailShape.NORTH_EAST || railShape == RailShape.NORTH_WEST || railShape == RailShape.SOUTH_EAST || railShape == RailShape.SOUTH_WEST;
     }
 
+    public static Axis getRailAxis(RailShape railShape) {
+        if (isCurvedShape(railShape)) {
+            return null;
+        }
+        if (railShape == RailShape.ASCENDING_EAST || railShape == RailShape.ASCENDING_WEST || railShape == RailShape.EAST_WEST) {
+            return EAST.getAxis();
+        }
+        return SOUTH.getAxis();
+    }
+
 }
