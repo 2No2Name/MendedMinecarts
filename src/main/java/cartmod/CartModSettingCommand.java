@@ -23,7 +23,7 @@ public class CartModSettingCommand
          -> listSettings(context.getSource()));
 
         for (Setting setting : CartMod.SETTINGS) {
-            setting.buildCommand(literalargumentbuilder);
+            literalargumentbuilder = literalargumentbuilder.then(setting.buildCommand());
         }
         dispatcher.register(literalargumentbuilder);
     }

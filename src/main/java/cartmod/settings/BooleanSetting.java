@@ -51,18 +51,16 @@ public class BooleanSetting implements Setting {
 
 
     @Override
-    public void buildCommand(LiteralArgumentBuilder<ServerCommandSource> literalargumentbuilder) {
-        literalargumentbuilder.
-                then((CommandManager.literal(this.name).executes(commandContext -> {
-                    commandContext.getSource().sendFeedback(this.asText(), false);
-                    commandContext.getSource().sendFeedback(this.getDefault(), false);
-                    return 1;
-                })));
-        literalargumentbuilder.then(CommandManager.literal(this.name).
+    public LiteralArgumentBuilder<ServerCommandSource> buildCommand() {
+        return CommandManager.literal(this.name).executes(commandContext -> {
+            commandContext.getSource().sendFeedback(this.asText(), false);
+            commandContext.getSource().sendFeedback(this.getDefault(), false);
+            return 1;
+        }).
                 then(CommandManager.argument("enabled", BoolArgumentType.bool()).executes((context) -> {
                     this.setEnabled(context.getArgument("enabled", Boolean.class));
                     context.getSource().sendFeedback(this.asText(), false);
                     return 1;
-                })));
+                }));
     }
 }

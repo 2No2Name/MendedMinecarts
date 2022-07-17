@@ -13,5 +13,5 @@ public interface Setting {
 
     Text getDescription();
 
-    void buildCommand(LiteralArgumentBuilder<ServerCommandSource> literalargumentbuilder);
+    LiteralArgumentBuilder<ServerCommandSource> buildCommand();
 }
