@@ -8,6 +8,8 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
+import java.util.Properties;
+
 public class BooleanSetting implements Setting {
     public final String name;
     private boolean state;
@@ -23,6 +25,7 @@ public class BooleanSetting implements Setting {
 
     public void setEnabled(boolean state) {
         this.state = state;
+        Setting.super.onChanged();
     }
 
     public boolean isEnabled() {
@@ -62,5 +65,23 @@ public class BooleanSetting implements Setting {
                     context.getSource().sendFeedback(this.asText(), false);
                     return 1;
                 }));
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public void loadFromProperties(Properties properties, String namePrefix) {
+        String property = properties.getProperty(namePrefix + this.name);
+        if (property != null) {
+            this.setEnabled(Boolean.parseBoolean(property));
+        }
+    }
+
+    @Override
+    public void writeToProperties(Properties properties, String namePrefix) {
+        properties.setProperty(namePrefix + this.name, String.valueOf(this.state));
     }
 }

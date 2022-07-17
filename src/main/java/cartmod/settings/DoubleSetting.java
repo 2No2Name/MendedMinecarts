@@ -8,6 +8,8 @@ import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
+import java.util.Properties;
+
 public class DoubleSetting implements Setting {
     public final String name;
     private double state;
@@ -23,6 +25,7 @@ public class DoubleSetting implements Setting {
 
     public void setDouble(double state) {
         this.state = state;
+        this.onChanged();
     }
 
     public double getState() {
@@ -60,5 +63,23 @@ public class DoubleSetting implements Setting {
             context.getSource().sendFeedback(this.asText(), false);
             return 1;
         }));
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public void loadFromProperties(Properties properties, String namePrefix) {
+        String property = properties.getProperty(namePrefix + this.name);
+        if (property != null) {
+            this.setDouble(Double.parseDouble(property));
+        }
+    }
+
+    @Override
+    public void writeToProperties(Properties properties, String namePrefix) {
+        properties.setProperty(namePrefix + this.name, String.valueOf(this.state));
     }
 }

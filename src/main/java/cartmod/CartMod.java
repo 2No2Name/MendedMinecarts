@@ -9,8 +9,13 @@ import net.minecraft.text.TranslatableText;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class CartMod implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
@@ -22,6 +27,7 @@ public class CartMod implements ModInitializer {
 	public static final String SETTING_COMMAND = "cartmod";
 
 	public static final List<Setting> SETTINGS = new ArrayList<>();
+	private static final String CONFIG_FILE = "./config/cartmod.properties";
 
 	public static <T extends Setting> T addSetting(T setting) {
 		SETTINGS.add(setting);
@@ -66,6 +72,35 @@ public class CartMod implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		this.loadSettings(new File(CONFIG_FILE));
+	}
 
+	private void loadSettings(File file) {
+		if (file.exists()) {
+			Properties properties = new Properties();
+			try (FileInputStream fileInputStream = new FileInputStream(file)) {
+				properties.load(fileInputStream);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+
+			for (Setting setting : SETTINGS) {
+				setting.loadFromProperties(properties, "");
+			}
+		}
+	}
+
+	public static void saveSettings() {
+		Properties properties = new Properties();
+		for (Setting setting : SETTINGS) {
+			setting.writeToProperties(properties, "");
+		}
+		File file = new File(CONFIG_FILE);
+		try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
+			properties.store(fileOutputStream, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

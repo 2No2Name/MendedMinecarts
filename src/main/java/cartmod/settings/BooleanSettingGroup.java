@@ -8,6 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
 import java.util.Arrays;
+import java.util.Properties;
 
 public class BooleanSettingGroup extends BooleanSetting {
 
@@ -70,6 +71,20 @@ public class BooleanSettingGroup extends BooleanSetting {
             source.sendFeedback(setting.getDefault(), false);
             source.sendFeedback(setting.getDescription(), false);
             source.sendFeedback(new LiteralText(""), false);
+        }
+    }
+
+    @Override
+    public void loadFromProperties(Properties properties, String namePrefix) {
+        for (Setting setting : this.children) {
+            setting.loadFromProperties(properties, this.name + ".");
+        }
+    }
+
+    @Override
+    public void writeToProperties(Properties properties, String namePrefix) {
+        for (Setting setting : this.children) {
+            setting.writeToProperties(properties, this.name + ".");
         }
     }
 }
