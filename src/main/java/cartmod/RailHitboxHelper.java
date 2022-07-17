@@ -23,12 +23,15 @@ import java.util.Set;
 import static net.minecraft.util.math.Direction.*;
 
 public class RailHitboxHelper {
+    public static final VoxelShape WALL_SHAPE = VoxelShapes.cuboid(0.48, 0.5, 0.48, 0.52, 1.2, 0.52);
     public static final Map<Direction, VoxelShape> DIRECTION_2_SHAPE = Util.make(Maps.newEnumMap(Direction.class), map -> {
-        map.put(EAST, VoxelShapes.cuboid(0.99, 0.5, 0.48, 1.01, 1.2, 0.52));
-        map.put(WEST, VoxelShapes.cuboid(-0.01, 0.5, 0.48, 0.01, 1.2, 0.52));
-        map.put(SOUTH, VoxelShapes.cuboid(0.48, 0.5, 0.99, 0.52, 1.2, 1.01));
-        map.put(NORTH, VoxelShapes.cuboid(0.48, 0.5, -0.01, 0.52, 1.2, 0.01));
+        map.put(EAST, getShapeForDirection(EAST));
+        map.put(WEST, getShapeForDirection(WEST));
+        map.put(NORTH, getShapeForDirection(NORTH));
+        map.put(SOUTH, getShapeForDirection(SOUTH));
     });
+
+
     public static final Map<RailShape, Set<Direction>> DERAIL_FIX_WALLS = Util.make(Maps.newEnumMap(RailShape.class), map -> {
         map.put(RailShape.NORTH_WEST, new ObjectArraySet<>(new Direction[]{SOUTH, EAST}));
         map.put(RailShape.NORTH_EAST, new ObjectArraySet<>(new Direction[]{SOUTH, WEST}));
@@ -45,6 +48,9 @@ public class RailHitboxHelper {
 
     public static final Map<Set<Direction>, VoxelShape> DIRECTIONS_2_SHAPES = new Object2ReferenceOpenHashMap<>();
 
+    private static VoxelShape getShapeForDirection(Direction direction) {
+        return WALL_SHAPE.offset(direction.getOffsetX(), direction.getOffsetY(), direction.getOffsetZ());
+    }
 
     private static VoxelShape getShapeForDirections(Set<Direction> directions) {
         VoxelShape totalShape = VoxelShapes.empty();
