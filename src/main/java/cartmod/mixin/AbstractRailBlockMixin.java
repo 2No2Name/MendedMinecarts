@@ -35,8 +35,7 @@ public abstract class AbstractRailBlockMixin extends Block {
     @Override
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         VoxelShape railCollisionShape;
-        RailShape railShape;
-        RailShape railShape2 = railShape = state.isOf(this) ? state.get(this.getShapeProperty()) : null;
+        RailShape railShape = state.isOf(this) ? state.get(this.getShapeProperty()) : null;
         if (railShape != null && railShape.isAscending()) {
             railCollisionShape = ASCENDING_SHAPE;
         } else {
