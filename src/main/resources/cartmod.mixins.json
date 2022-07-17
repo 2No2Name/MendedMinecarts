@@ -7,15 +7,13 @@
     "AbstractBlockSettingAccessor",
     "AbstractMinecartEntityMixin_ConfiguredSpeed",
     "AbstractMinecartEntityMixin_DerailFix",
+    "AbstractRailBlockMixin",
     "BlocksMixin",
     "CommandManagerMixin",
     "DataQueryHandlerMixin",
-    "DetectorRailBlockMixin",
     "EntityShapeContextAccessor",
     "EntityTrackerEntryMixin",
-    "MinecartEntityRendererMixin",
-    "PoweredRailBlockMixin",
-    "RailBlockMixin"
+    "MinecartEntityRendererMixin"
   ],
   "client": [
     "AbstractMinecartEntityMixin_Client",
