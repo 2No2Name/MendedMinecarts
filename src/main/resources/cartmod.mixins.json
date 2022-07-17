@@ -10,9 +10,11 @@
     "BlocksMixin",
     "CommandManagerMixin",
     "DataQueryHandlerMixin",
+    "DetectorRailBlockMixin",
     "EntityShapeContextAccessor",
     "EntityTrackerEntryMixin",
     "MinecartEntityRendererMixin",
+    "PoweredRailBlockMixin",
     "RailBlockMixin"
   ],
   "client": [

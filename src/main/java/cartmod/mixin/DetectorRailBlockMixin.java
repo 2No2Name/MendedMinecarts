@@ -1,10 +1,7 @@
 package cartmod.mixin;
 
 import cartmod.RailHitboxHelper;
-import net.minecraft.block.AbstractRailBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.RailBlock;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.RailShape;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.math.BlockPos;
@@ -14,11 +11,11 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(RailBlock.class)
-public abstract class RailBlockMixin extends AbstractRailBlock{
+@Mixin(DetectorRailBlock.class)
+public abstract class DetectorRailBlockMixin extends AbstractRailBlock {
     @Shadow @Final public static EnumProperty<RailShape> SHAPE;
 
-    protected RailBlockMixin(boolean forbidCurves, Settings settings) {
+    protected DetectorRailBlockMixin(boolean forbidCurves, Settings settings) {
         super(forbidCurves, settings);
     }
 

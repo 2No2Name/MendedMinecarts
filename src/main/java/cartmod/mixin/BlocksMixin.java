@@ -20,4 +20,26 @@ public class BlocksMixin {
         ((AbstractBlockSettingAccessor)settings).setDynamicBounds(true);
         return settings;
     }
+    @ModifyArg(
+            method = "<clinit>",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/block/PoweredRailBlock;<init>(Lnet/minecraft/block/AbstractBlock$Settings;)V"
+            )
+    )
+    private static AbstractBlock.Settings modifyRailBlockSettings1(AbstractBlock.Settings settings) {
+        ((AbstractBlockSettingAccessor)settings).setDynamicBounds(true);
+        return settings;
+    }
+    @ModifyArg(
+            method = "<clinit>",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/block/DetectorRailBlock;<init>(Lnet/minecraft/block/AbstractBlock$Settings;)V"
+            )
+    )
+    private static AbstractBlock.Settings modifyRailBlockSettings2(AbstractBlock.Settings settings) {
+        ((AbstractBlockSettingAccessor)settings).setDynamicBounds(true);
+        return settings;
+    }
 }
