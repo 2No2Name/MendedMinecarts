@@ -1,20 +1,21 @@
 package cartmod.mixin;
 
+import it.unimi.dsi.fastutil.ints.Int2ReferenceLinkedOpenHashMap;
 import net.minecraft.client.network.DataQueryHandler;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.Pair;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import java.util.ArrayDeque;
 import java.util.function.Consumer;
 
 @Mixin(DataQueryHandler.class)
 public class DataQueryHandlerMixin {
-    @Shadow private int expectedTransactionId;
-    private final ArrayDeque<Pair<Integer, Consumer<NbtCompound>>> callbacks = new ArrayDeque<>();
+    @Shadow
+    private int expectedTransactionId;
+    private final Int2ReferenceLinkedOpenHashMap<Consumer<NbtCompound>> callbacks = new Int2ReferenceLinkedOpenHashMap<>();
+    private final int MAX_SIZE = 1000;
 
     /**
      * @author 2No2Name
@@ -22,12 +23,9 @@ public class DataQueryHandlerMixin {
      */
     @Overwrite
     public boolean handleQueryResponse(int transactionId, @Nullable NbtCompound nbt) {
-        Pair<Integer, Consumer<NbtCompound>> callback;
-        while (!this.callbacks.isEmpty()) {
-            if ((callback = this.callbacks.poll()).getLeft() != transactionId) {
-                continue;
-            }
-            callback.getRight().accept(nbt);
+        Consumer<NbtCompound> consumer = this.callbacks.get(transactionId);
+        if (consumer != null) {
+            consumer.accept(nbt);
             return true;
         }
         return false;
@@ -35,7 +33,11 @@ public class DataQueryHandlerMixin {
 
     private int nextQuery(Consumer<NbtCompound> callback) {
         ++this.expectedTransactionId;
-        this.callbacks.add(new Pair<>(this.expectedTransactionId, callback));
+        this.callbacks.put(this.expectedTransactionId, callback);
+
+        if (this.callbacks.size() > MAX_SIZE) {
+            this.callbacks.removeFirst();
+        }
         return this.expectedTransactionId;
     }
 }
