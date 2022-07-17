@@ -7,6 +7,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 
 /**
@@ -36,7 +37,9 @@ public class CartModSettingCommand
         for (Setting setting : CartMod.SETTINGS)
         {
             source.sendFeedback(setting.asText(), false);
+            source.sendFeedback(setting.getDefault(), false);
             source.sendFeedback(setting.getDescription(), false);
+            source.sendFeedback(new LiteralText(""), false);
         }
         return 1;
     }

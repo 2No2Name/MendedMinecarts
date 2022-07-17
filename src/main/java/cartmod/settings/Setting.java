@@ -9,6 +9,8 @@ public interface Setting {
 
     Text asText();
 
+    Text getDefault();
+
     Text getDescription();
 
     void buildCommand(LiteralArgumentBuilder<ServerCommandSource> literalargumentbuilder);

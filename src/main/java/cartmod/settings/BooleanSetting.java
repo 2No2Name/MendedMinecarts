@@ -36,7 +36,12 @@ public class BooleanSetting implements Setting {
 
     @Override
     public Text asText() {
-        return new LiteralText(name).append(": ").append(new LiteralText(String.valueOf(state))).append(" ").append(new TranslatableText("cartmod.default")).append(" ").append(String.valueOf(defaultState));
+        return new LiteralText(name).append(": ").append(new LiteralText(String.valueOf(state)));
+    }
+
+    @Override
+    public Text getDefault() {
+        return new TranslatableText("cartmod.default").append(": ").append(String.valueOf(defaultState));
     }
 
     @Override
@@ -50,11 +55,13 @@ public class BooleanSetting implements Setting {
         literalargumentbuilder.
                 then((CommandManager.literal(this.name).executes(commandContext -> {
                     commandContext.getSource().sendFeedback(this.asText(), false);
+                    commandContext.getSource().sendFeedback(this.getDefault(), false);
                     return 1;
                 })));
         literalargumentbuilder.then(CommandManager.literal(this.name).
                 then(CommandManager.argument("enabled", BoolArgumentType.bool()).executes((context) -> {
                     this.setEnabled(context.getArgument("enabled", Boolean.class));
+                    context.getSource().sendFeedback(this.asText(), false);
                     return 1;
                 })));
     }
