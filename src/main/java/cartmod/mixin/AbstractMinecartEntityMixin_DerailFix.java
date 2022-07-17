@@ -51,19 +51,22 @@ public abstract class AbstractMinecartEntityMixin_DerailFix extends Entity imple
         if (this.getBlockPos().equals(previousPos)) {
             return;
         }
-//        Vec3d velocity = this.getVelocity();
-//        if (velocity.x == 0 && Math.abs(previousVelocity.x) > 0.5) {
-//            velocity = velocity.withAxis(Direction.Axis.X, previousVelocity.x * this.getVelocityMultiplier());
-//        }
-//        if (velocity.z == 0 && Math.abs(previousVelocity.z) > 0.5) {
-//            velocity = velocity.withAxis(Direction.Axis.Z, previousVelocity.z * this.getVelocityMultiplier());
-//        }
+        boolean hasHitWall = false;
+        Vec3d velocity = this.getVelocity();
+        if (velocity.x == 0 && Math.abs(previousVelocity.x) > 0.5) {
+            velocity = velocity.withAxis(Direction.Axis.X, previousVelocity.x * this.getVelocityMultiplier());
+            hasHitWall = true;
+        }
+        if (velocity.z == 0 && Math.abs(previousVelocity.z) > 0.5) {
+            velocity = velocity.withAxis(Direction.Axis.Z, previousVelocity.z * this.getVelocityMultiplier());
+            hasHitWall = true;
+        }
+        if (!hasHitWall) {
+            return;
+        }
         BlockState blockState = this.world.getBlockState(this.getBlockPos());
         if (blockState.isOf(Blocks.RAIL)) {
-//            RailShape railShape = blockState.get(RailBlock.SHAPE);
-//            if (RailHitboxHelper.isCurvedShape(railShape)) {
-            this.setVelocity(previousVelocity.multiply(this.getVelocityMultiplier()));
-//            }
+            this.setVelocity(velocity);
         }
     }
     @Inject(
