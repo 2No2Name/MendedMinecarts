@@ -56,14 +56,18 @@ public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d veloc
         if (this.pos() == null) {
             return new TranslatableText("cartmod.pos").append(": ").append(new TranslatableText("cartmod.unknown"));
         }
-        return new TranslatableText("cartmod.pos").append(": ").append(this.pos().toString());
+        return new TranslatableText("cartmod.pos").append(": ").append(formatVec3d(this.pos()));
+    }
+
+    public static String formatVec3d(Vec3d vec) {
+        return "(" + String.format("%.4f", vec.x) + ", " + String.format("%.2f", vec.y) + ", " + String.format("%.2f", vec.z) + ")";
     }
 
     public Text getDisplayVelocityText() {
         if (this.velocity() == null) {
             return new TranslatableText("cartmod.velocity").append(": ").append(new TranslatableText("cartmod.unknown"));
         }
-        return new TranslatableText("cartmod.velocity").append(": ").append(this.velocity().toString());
+        return new TranslatableText("cartmod.velocity").append(": ").append(formatVec3d(this.velocity()));
     }
 
     public ArrayList<Text> getInfoTexts() {

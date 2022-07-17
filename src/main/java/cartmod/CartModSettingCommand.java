@@ -1,9 +1,7 @@
 package cartmod;
 
-import cartmod.settings.BooleanSetting;
 import cartmod.settings.Setting;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -34,6 +32,7 @@ public class CartModSettingCommand
     private static int listSettings(ServerCommandSource source)
     {
         source.sendFeedback(new TranslatableText("cartmod.available_settings"), false);
+        source.sendFeedback(new TranslatableText(""), false);
         for (Setting setting : CartMod.SETTINGS)
         {
             source.sendFeedback(setting.asText(), false);
