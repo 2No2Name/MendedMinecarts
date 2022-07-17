@@ -31,6 +31,11 @@ public class DataQueryHandlerMixin {
         return false;
     }
 
+    /**
+     * @author 2No2Name
+     * @reason allow queueing multiple queries
+     */
+    @Overwrite
     private int nextQuery(Consumer<NbtCompound> callback) {
         ++this.expectedTransactionId;
         this.callbacks.put(this.expectedTransactionId, callback);
