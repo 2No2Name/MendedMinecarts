@@ -29,7 +29,7 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
 
     @Inject(
             method = "render(Lnet/minecraft/entity/vehicle/AbstractMinecartEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
-            at = @At("HEAD")
+            at = @At("RETURN")
     )
     private void renderInfo(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
         if (CartMod.DISPLAY_CART_DATA.isEnabled() && entity instanceof AbstractMinecartEntityAccess entityAccess) {
@@ -52,7 +52,7 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
 
             float f = entity.getHeight() + 0.5f;
 
-            float yOffset = 10;
+            float yOffset = 20;
             for (Text infoText : infoTexts) {
                 matrices.push();
                 matrices.translate(0.0, f, 0.0);
@@ -62,7 +62,7 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
                 float g = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f);
                 int j = (int)(g * 255.0f) << 24;
                 float h = -textRenderer.getWidth(infoText) / 2f;
-                textRenderer.draw(infoText, h, yOffset, -1, false, matrix4f, vertexConsumerProvider, false, 0, light);
+                textRenderer.draw(infoText, h, yOffset, -1, false, matrix4f, vertexConsumerProvider, true, 0, light);
 
                 matrices.pop();
 
