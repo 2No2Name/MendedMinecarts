@@ -59,7 +59,7 @@ public class DoubleSetting implements Setting {
             return 1;
         }).then(CommandManager.argument("state", DoubleArgumentType.doubleArg()).executes((context) -> {
             this.setDouble(context.getArgument("state", Double.class));
-            this.onChanged();
+            this.onChangedByCommand();
             context.getSource().sendFeedback(this.asText(), false);
             return 1;
         }));

@@ -12,7 +12,7 @@ import java.util.Properties;
 public interface Setting {
     boolean isClient = FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT;
 
-    default void onChanged() {
+    default void onChangedByCommand() {
         if (isClient) {
             CartMod.saveSettings();
         } else {

@@ -61,7 +61,7 @@ public class BooleanSetting implements Setting {
         }).
                 then(CommandManager.argument("enabled", BoolArgumentType.bool()).executes((context) -> {
                     this.setEnabled(context.getArgument("enabled", Boolean.class));
-                    Setting.super.onChanged();
+                    Setting.super.onChangedByCommand();
                     context.getSource().sendFeedback(this.asText(), false);
                     return 1;
                 }));
