@@ -14,25 +14,34 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
 public class CartMod implements ModInitializer {
-	// This logger is used to write text to the console and the log file.
-	// It is considered best practice to use your mod id as the logger's name.
-	// That way, it's clear which mod wrote info, warnings, and errors.
-	public static final Logger LOGGER = LoggerFactory.getLogger("cartmod");
-	//TODO USE MENDEDMINECARTS as name with bandaid logo
+    // This logger is used to write text to the console and the log file.
+    // It is considered best practice to use your mod id as the logger's name.
+    // That way, it's clear which mod wrote info, warnings, and errors.
+    public static final Logger LOGGER = LoggerFactory.getLogger("cartmod");
+    //TODO USE MENDEDMINECARTS as name with bandaid logo
 
-	public static final String SETTING_COMMAND = "cartmod";
+    public static final String SETTING_COMMAND = "cartmod";
 
-	public static final List<Setting> SETTINGS = new ArrayList<>();
-	private static final String CONFIG_FILE = "./config/cartmod.properties";
+    public static final List<Setting> SETTINGS = new ArrayList<>();
+    public static final List<Setting> FLAT_SETTINGS = new ArrayList<>();
+    public static final int SETTING_VERSION = 1;
+    private static final String CONFIG_FILE = "./config/cartmod.properties";
 
-	public static <T extends Setting> T addSetting(T setting) {
-		SETTINGS.add(setting);
-		return setting;
-	}
+    public static <T extends Setting> T addSetting(T setting) {
+        SETTINGS.add(setting);
+        if (setting instanceof BooleanSettingGroup group) {
+            FLAT_SETTINGS.addAll(Arrays.asList(group.getChildren()));
+        } else {
+            FLAT_SETTINGS.add(setting);
+        }
+
+        return setting;
+    }
 
 	public static BooleanSetting DISPLAY_CART_DATA_POS = new BooleanSetting("Position", false, new TranslatableText("cartmod.display_cart_data.position.description"));
 	public static BooleanSetting DISPLAY_CART_DATA_VELOCITY = new BooleanSetting("Velocity", false, new TranslatableText("cartmod.display_cart_data.velocity.description"));
@@ -86,8 +95,12 @@ public class CartMod implements ModInitializer {
 			}
 
 			for (Setting setting : SETTINGS) {
-				setting.loadFromProperties(properties, "");
-			}
+                try {
+                    setting.loadFromProperties(properties, "");
+                } catch (Exception e) {
+                    LOGGER.error("Setting " + setting.getName() + " could not be read from config");
+                }
+            }
 		}
 	}
 

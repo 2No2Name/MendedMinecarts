@@ -87,4 +87,8 @@ public class BooleanSettingGroup extends BooleanSetting {
             setting.writeToProperties(properties, this.name + ".");
         }
     }
+
+    public Setting[] getChildren() {
+        return this.children;
+    }
 }

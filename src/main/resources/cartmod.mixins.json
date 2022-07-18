@@ -14,7 +14,9 @@
     "DataQueryHandlerMixin",
     "EntityShapeContextAccessor",
     "EntityTrackerEntryMixin",
-    "MinecartEntityRendererMixin"
+    "MinecartEntityRendererMixin",
+    "settings.ClientPlayNetworkHandlerMixin",
+    "settings.PlayerManagerMixin"
   ],
   "client": [
     "AbstractMinecartEntityMixin_Client",

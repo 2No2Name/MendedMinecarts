@@ -25,7 +25,6 @@ public class DoubleSetting implements Setting {
 
     public void setDouble(double state) {
         this.state = state;
-        this.onChanged();
     }
 
     public double getState() {
@@ -60,6 +59,7 @@ public class DoubleSetting implements Setting {
             return 1;
         }).then(CommandManager.argument("state", DoubleArgumentType.doubleArg()).executes((context) -> {
             this.setDouble(context.getArgument("state", Double.class));
+            this.onChanged();
             context.getSource().sendFeedback(this.asText(), false);
             return 1;
         }));
@@ -74,12 +74,22 @@ public class DoubleSetting implements Setting {
     public void loadFromProperties(Properties properties, String namePrefix) {
         String property = properties.getProperty(namePrefix + this.name);
         if (property != null) {
-            this.setDouble(Double.parseDouble(property));
+            this.setFromStringValue(property);
         }
     }
 
     @Override
     public void writeToProperties(Properties properties, String namePrefix) {
-        properties.setProperty(namePrefix + this.name, String.valueOf(this.state));
+        properties.setProperty(namePrefix + this.name, this.getStringValue());
+    }
+
+    @Override
+    public void setFromStringValue(String settingValue) {
+        this.setDouble(Double.parseDouble(settingValue));
+    }
+
+    @Override
+    public String getStringValue() {
+        return String.valueOf(this.state);
     }
 }

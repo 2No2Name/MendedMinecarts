@@ -25,7 +25,6 @@ public class BooleanSetting implements Setting {
 
     public void setEnabled(boolean state) {
         this.state = state;
-        Setting.super.onChanged();
     }
 
     public boolean isEnabled() {
@@ -62,6 +61,7 @@ public class BooleanSetting implements Setting {
         }).
                 then(CommandManager.argument("enabled", BoolArgumentType.bool()).executes((context) -> {
                     this.setEnabled(context.getArgument("enabled", Boolean.class));
+                    Setting.super.onChanged();
                     context.getSource().sendFeedback(this.asText(), false);
                     return 1;
                 }));
@@ -76,12 +76,22 @@ public class BooleanSetting implements Setting {
     public void loadFromProperties(Properties properties, String namePrefix) {
         String property = properties.getProperty(namePrefix + this.name);
         if (property != null) {
-            this.setEnabled(Boolean.parseBoolean(property));
+            this.setFromStringValue(property);
         }
     }
 
     @Override
     public void writeToProperties(Properties properties, String namePrefix) {
-        properties.setProperty(namePrefix + this.name, String.valueOf(this.state));
+        properties.setProperty(namePrefix + this.name, this.getStringValue());
+    }
+
+    @Override
+    public void setFromStringValue(String settingValue) {
+        this.setEnabled(Boolean.parseBoolean(settingValue));
+    }
+
+    @Override
+    public String getStringValue() {
+        return String.valueOf(this.state);
     }
 }
