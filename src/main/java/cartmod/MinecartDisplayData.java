@@ -4,13 +4,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.FurnaceMinecartEntity;
 import net.minecraft.entity.vehicle.StorageMinecartEntity;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.Inventories;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.ArrayList;
@@ -33,13 +35,28 @@ public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d veloc
 
         boolean onGround = nbt.getBoolean("OnGround");
 
-        int fillLevel = entity instanceof Inventory inventory ? ScreenHandler.calculateComparatorOutput(inventory) : -1;
+        int fillLevel = entity instanceof StorageMinecartEntity inventory ? getComparatorOutput(inventory, nbt) : -1;
+
         double slowdown = getSlowdown((Entity) entity, nbt, fillLevel);
         double estimatedDistance = estimateDistance(velocity.length(), (AbstractMinecartEntity) entity, slowdown);
 
 
         Box boxAt = ((Entity) entity).getType().getDimensions().getBoxAt(pos.x, pos.y, pos.z);
         return new MinecartDisplayData(pos, boxAt, velocity, onGround, fillLevel, slowdown, estimatedDistance, (AbstractMinecartEntity) entity);
+    }
+
+    private static int getComparatorOutput(StorageMinecartEntity inventory, NbtCompound nbtCompound) {
+        DefaultedList<ItemStack> itemStacks = DefaultedList.ofSize(inventory.size(), ItemStack.EMPTY);
+        Inventories.readNbt(nbtCompound, itemStacks);
+        int stacks = 0;
+        float weight = 0.0f;
+        for (ItemStack itemStack : itemStacks) {
+            if (!itemStack.isEmpty()) {
+                weight += (float) itemStack.getCount() / (float) Math.min(inventory.getMaxCountPerStack(), itemStack.getMaxCount());
+                ++stacks;
+            }
+        }
+        return MathHelper.floor(weight / (float) inventory.size() * 14.0f) + (stacks > 0 ? 1 : 0);
     }
 
     public Text getDisplayPosText() {
@@ -64,7 +81,12 @@ public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d veloc
         if (this.velocity() == null) {
             return new TranslatableText("cartmod.speed").append(": ").append(new TranslatableText("cartmod.unknown"));
         }
-        return new TranslatableText("cartmod.speed").append(": ").append(String.format("%.4f", this.velocity().multiply(20d).length())).append(new TranslatableText("cartmod.blocks_per_second"));
+        double speed = this.velocity().multiply(20d).length();
+        if (this.entity().hasPassengers()) {
+            speed *= 0.75;
+        }
+        speed = Math.min(speed, CartHelper.getMaxSpeed(this.entity()));
+        return new TranslatableText("cartmod.speed").append(": ").append(String.format("%.4f", speed)).append(new TranslatableText("cartmod.blocks_per_second"));
     }
 
     public Text getDisplayEstimatedDistanceText() {
@@ -75,6 +97,9 @@ public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d veloc
     }
 
     private static double estimateDistance(double velocity, AbstractMinecartEntity entity, double slowdownFactor) {
+        if (entity.hasPassengers()) {
+            velocity *= 0.75; //taken from on rail movement before Entity.move call
+        }
         int maxSteps = 100000;
         double distance = 0;
         double maxSpeed = CartHelper.getMaxSpeed(entity);
@@ -140,7 +165,7 @@ public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d veloc
         if (CartMod.DISPLAY_CART_DATA_ESTIMATED_DISTANCE.isEnabled() && this.velocity() != null) {
             infoTexts.add(this.getDisplayEstimatedDistanceText());
         }
-        if (CartMod.DISPLAY_CART_DATA_IN_WATER.isEnabled()) {
+        if (CartMod.DISPLAY_CART_DATA_IN_WATER.isEnabled() && CartMod.ACCURATE_CLIENT_MINECARTS.isEnabled()) {
             infoTexts.add(new TranslatableText("cartmod.in_water").append(": ").append(String.valueOf(this.inWater())));
         }
         if (CartMod.DISPLAY_CART_DATA_ON_GROUND.isEnabled()) {
