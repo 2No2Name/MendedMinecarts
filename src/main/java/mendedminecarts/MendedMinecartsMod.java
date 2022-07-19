@@ -25,7 +25,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("mendedminecarts");
 	//TODO USE MENDEDMINECARTS as name with bandaid logo
 
-	public static final int SETTING_VERSION = 1;
+	public static final int SETTING_VERSION = 2;
 	public static final String SETTING_COMMAND = "mendedminecarts";
 
 	public static final List<Setting> SETTINGS = new ArrayList<>();
@@ -76,7 +76,6 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting DERAILING_CART_FIX = addSetting(new BooleanSetting("DerailingCartFix", false, new TranslatableText("mendedminecarts.derailing_cart_fix.description")));
 	//	public static BooleanSetting DERAILING_CART_FIX_DEMO = new BooleanSetting("DerailingCartFixDemo", false, new TranslatableText("mendedminecarts.derailing_cart_fix_demo.description")));
 	public static final BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, new TranslatableText("mendedminecarts.rotate_cart_to_rail.description")));
-	//todo Issue: Needs client side code for client side rules
 
 	@Override
 	public void onInitialize() {
