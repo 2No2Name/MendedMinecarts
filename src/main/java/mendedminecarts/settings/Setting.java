@@ -39,4 +39,6 @@ public interface Setting {
     void setFromStringValue(String settingValue);
 
     String getStringValue();
+
+    boolean isEnabled();
 }

@@ -142,7 +142,7 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
     }
 
     private static String getDoubleFormatString() {
-        return "%." + Math.abs(MendedMinecartsMod.DATA_PRECISION.getState()) + "f";
+        return "%." + Math.abs(MendedMinecartsMod.DISPLAY_CART_DATA_PRECISION.getState()) + "f";
     }
 
     public Optional<Text> getFillLevel() {

@@ -22,7 +22,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("mendedminecarts");
 	//TODO USE MENDEDMINECARTS as name with bandaid logo
 
-	public static final int SETTING_VERSION = 4;
+	public static final int SETTING_VERSION = 5;
 	public static final String SETTING_COMMAND = "mendedminecarts";
 	public static final double DATA_RENDER_DISTANCE_SQ = 25d * 25d;
 
@@ -32,7 +32,7 @@ public class MendedMinecartsMod implements ModInitializer {
 
 	public static <T extends Setting> T addSetting(T setting) {
 		SETTINGS.add(setting);
-		if (setting instanceof BooleanSettingGroup group) {
+		if (setting instanceof SettingGroup group) {
 			FLAT_SETTINGS.addAll(Arrays.asList(group.getChildren()));
 		} else {
 			FLAT_SETTINGS.add(setting);
@@ -50,10 +50,11 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting DISPLAY_CART_DATA_SLOWDOWN_RATE = new BooleanSetting("SlowdownRate", false, new TranslatableText("mendedminecarts.display_cart_data.slowdown_rate.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_ESTIMATED_DISTANCE = new BooleanSetting("EstimatedDistance", false, new TranslatableText("mendedminecarts.display_cart_data.estimated_distance.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_BOX = new BooleanSetting("BoundingBox", false, new TranslatableText("mendedminecarts.display_cart_data.bounding_box.description"));
+	public static final IntegerSetting DISPLAY_CART_DATA_PRECISION = new IntegerSetting("DataPrecision", 4, new TranslatableText("mendedminecarts.data_precision.description"));
 
 
-	public static final BooleanSettingGroup DISPLAY_CART_DATA = addSetting(
-			new BooleanSettingGroup("DisplayCartData", false, new TranslatableText("mendedminecarts.display_cart_data.description"))
+	public static final SettingGroup DISPLAY_CART_DATA = addSetting(
+			new SettingGroup("DisplayCartData", false, new TranslatableText("mendedminecarts.display_cart_data.description"))
 					.children(
 							DISPLAY_CART_DATA_BOX,
 							DISPLAY_CART_DATA_POS,
@@ -63,7 +64,8 @@ public class MendedMinecartsMod implements ModInitializer {
 							DISPLAY_CART_DATA_ON_GROUND,
 							DISPLAY_CART_DATA_IN_WATER,
 							DISPLAY_CART_DATA_SLOWDOWN_RATE,
-							DISPLAY_CART_DATA_ESTIMATED_DISTANCE
+							DISPLAY_CART_DATA_ESTIMATED_DISTANCE,
+							DISPLAY_CART_DATA_PRECISION
 					)
 	);
 
@@ -74,7 +76,6 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting DERAILING_CART_FIX = addSetting(new BooleanSetting("DerailingCartFix", false, new TranslatableText("mendedminecarts.derailing_cart_fix.description")));
 	//	public static BooleanSetting DERAILING_CART_FIX_DEMO = new BooleanSetting("DerailingCartFixDemo", false, new TranslatableText("mendedminecarts.derailing_cart_fix_demo.description")));
 	public static final BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, new TranslatableText("mendedminecarts.rotate_cart_to_rail.description")));
-	public static final IntegerSetting DATA_PRECISION = addSetting(new IntegerSetting("DataPrecision", 4, new TranslatableText("mendedminecarts.data_precision.description")));
 
 	@Override
 	public void onInitialize() {

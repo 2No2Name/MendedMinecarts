@@ -92,4 +92,9 @@ public class DoubleSetting implements Setting {
     public String getStringValue() {
         return String.valueOf(this.state);
     }
+
+    @Override
+    public boolean isEnabled() {
+        return !this.isDefault();
+    }
 }

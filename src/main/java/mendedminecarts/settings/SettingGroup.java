@@ -10,28 +10,28 @@ import net.minecraft.text.TranslatableText;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class BooleanSettingGroup extends BooleanSetting {
+public class SettingGroup extends BooleanSetting {
 
-    private BooleanSetting[] children;
+    private Setting[] children;
 
-    public BooleanSettingGroup(String name, boolean defaultState, Text description) {
+    public SettingGroup(String name, boolean defaultState, Text description) {
         super(name, defaultState, description);
         this.children = new BooleanSetting[0];
     }
 
-    public BooleanSettingGroup children(BooleanSetting... children) {
+    public SettingGroup children(Setting... children) {
         this.children = children;
         return this;
     }
 
     @Override
     public boolean isEnabled() {
-        return Arrays.stream(this.children).anyMatch(BooleanSetting::isEnabled);
+        return Arrays.stream(this.children).anyMatch(Setting::isEnabled);
     }
 
     @Override
     public boolean isDefault() {
-        return Arrays.stream(this.children).allMatch(BooleanSetting::isDefault);
+        return Arrays.stream(this.children).allMatch(Setting::isDefault);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class BooleanSettingGroup extends BooleanSetting {
         return builder;
     }
 
-    private static void listChildren(ServerCommandSource source, BooleanSetting[] children) {
+    private static void listChildren(ServerCommandSource source, Setting[] children) {
         source.sendFeedback(new TranslatableText("mendedminecarts.available_settings"), false);
         source.sendFeedback(new TranslatableText(""), false);
         for (Setting setting : children) {
