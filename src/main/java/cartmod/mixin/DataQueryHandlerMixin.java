@@ -23,7 +23,7 @@ public class DataQueryHandlerMixin {
      */
     @Overwrite
     public boolean handleQueryResponse(int transactionId, @Nullable NbtCompound nbt) {
-        Consumer<NbtCompound> consumer = this.callbacks.get(transactionId);
+        Consumer<NbtCompound> consumer = this.callbacks.remove(transactionId);
         if (consumer != null) {
             consumer.accept(nbt);
             return true;

@@ -65,7 +65,11 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 	private void updateDisplayInfo(CallbackInfo ci) {
 		if ((CartMod.DISPLAY_CART_POSITION.isEnabled() || CartMod.DISPLAY_CART_DATA.isEnabled()) && this.world.isClient && MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.hasPermissionLevel(2)) {
 			MinecraftClient.getInstance().player.networkHandler.getDataQueryHandler().queryEntityNbt(this.getId(), nbt -> {
-				this.displayData = MinecartDisplayData.fromNBT(this, nbt);
+				try {
+					this.displayData = MinecartDisplayData.fromNBT(this, nbt);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			});
 		} else if (this.world.isClient()){
 			this.displayData = null;
