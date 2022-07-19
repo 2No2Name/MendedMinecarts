@@ -21,7 +21,7 @@ import java.util.Optional;
 /**
  * Stores last received server side minecart data
  */
-public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d velocity, boolean onGround, int fillLevel,
+public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, boolean onGround, int fillLevel,
                                   double slowdownFactor, double estimatedDistance, AbstractMinecartEntity entity) {
 
     public static MinecartDisplayData fromNBT(AbstractMinecartEntityAccess entity, NbtCompound nbt) {
@@ -97,6 +97,10 @@ public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d veloc
     }
 
     private static double estimateDistance(double velocity, AbstractMinecartEntity entity, double slowdownFactor) {
+        slowdownFactor = Math.abs(slowdownFactor);
+        if (slowdownFactor >= 1) {
+            return Double.POSITIVE_INFINITY;
+        }
         if (entity.hasPassengers()) {
             velocity *= 0.75; //taken from on rail movement before Entity.move call
         }

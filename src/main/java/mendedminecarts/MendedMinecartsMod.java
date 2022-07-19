@@ -25,7 +25,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("mendedminecarts");
 	//TODO USE MENDEDMINECARTS as name with bandaid logo
 
-	public static final int SETTING_VERSION = 2;
+	public static final int SETTING_VERSION = 3;
 	public static final String SETTING_COMMAND = "mendedminecarts";
 	public static final double DATA_RENDER_DISTANCE_SQ = 25d * 25d;
 
@@ -52,7 +52,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting DISPLAY_CART_DATA_IN_WATER = new BooleanSetting("InWater", false, new TranslatableText("mendedminecarts.display_cart_data.in_water.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_SLOWDOWN_RATE = new BooleanSetting("SlowdownRate", false, new TranslatableText("mendedminecarts.display_cart_data.slowdown_rate.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_ESTIMATED_DISTANCE = new BooleanSetting("EstimatedDistance", false, new TranslatableText("mendedminecarts.display_cart_data.estimated_distance.description"));
-	public static final BooleanSetting DISPLAY_CART_DATA_BOX = addSetting(new BooleanSetting("BoundingBox", false, new TranslatableText("mendedminecarts.display_cart_data.bounding_box.description")));
+	public static final BooleanSetting DISPLAY_CART_DATA_BOX = new BooleanSetting("BoundingBox", false, new TranslatableText("mendedminecarts.display_cart_data.bounding_box.description"));
 
 
 	public static final BooleanSettingGroup DISPLAY_CART_DATA = addSetting(

@@ -36,7 +36,7 @@ public abstract class WorldRendererMixin_Client {
             }
             MinecartDisplayData displayInfo = entityAccess.getDisplayInfo();
             if (displayInfo != null) {
-                Box box = displayInfo.lastReceivedPosBox();
+                Box box = displayInfo.boundingBox();
                 if (box != null) {
                     matrices.push();
                     matrices.translate(-cameraX, -cameraY, -cameraZ);
