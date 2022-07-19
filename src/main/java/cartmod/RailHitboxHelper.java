@@ -60,28 +60,28 @@ public class RailHitboxHelper {
         return totalShape;
     }
 
-    public static <T extends Comparable<T>> VoxelShape getOutlineShape(VoxelShape railCollisionShape, BlockState state, RailShape railShape, BlockView world, BlockPos pos, ShapeContext context) {
-        if (CartMod.DERAILING_CART_FIX.isEnabled() || CartMod.DERAILING_CART_FIX_DEMO.isEnabled()) {
-            Set<Direction> derailFixWalls = RailHitboxHelper.DERAIL_FIX_WALLS.get(railShape);
-
-            if (derailFixWalls != null) {
-                ObjectArraySet<VoxelShape> wallShapes = new ObjectArraySet<>();
-                for (var wall : derailFixWalls) {
-                    wallShapes.add(DIRECTION_2_SHAPE.computeIfAbsent(wall, RailHitboxHelper::getShapeForDirection));
-                }
-                if (!railCollisionShape.isEmpty()) {
-                    wallShapes.add(railCollisionShape);
-                }
-                return WALL_SHAPES_UNION.computeIfAbsent(wallShapes, RailHitboxHelper::getUnionShape);
-            }
-        }
-        return railCollisionShape;
-    }
+//    public static <T extends Comparable<T>> VoxelShape getOutlineShape(VoxelShape railCollisionShape, BlockState state, RailShape railShape, BlockView world, BlockPos pos, ShapeContext context) {
+//        if (CartMod.DERAILING_CART_FIX.isEnabled() /*|| CartMod.DERAILING_CART_FIX_DEMO.isEnabled()*/) {
+//            Set<Direction> derailFixWalls = RailHitboxHelper.DERAIL_FIX_WALLS.get(railShape);
+//
+//            if (derailFixWalls != null) {
+//                ObjectArraySet<VoxelShape> wallShapes = new ObjectArraySet<>();
+//                for (var wall : derailFixWalls) {
+//                    wallShapes.add(DIRECTION_2_SHAPE.computeIfAbsent(wall, RailHitboxHelper::getShapeForDirection));
+//                }
+//                if (!railCollisionShape.isEmpty()) {
+//                    wallShapes.add(railCollisionShape);
+//                }
+//                return WALL_SHAPES_UNION.computeIfAbsent(wallShapes, RailHitboxHelper::getUnionShape);
+//            }
+//        }
+//        return railCollisionShape;
+//    }
 
     public static VoxelShape getCollisionShape(VoxelShape railCollisionShape, RailShape railShape, BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if (CartMod.DERAILING_CART_FIX_DEMO.isEnabled()) {
-            return getOutlineShape(railCollisionShape, state, railShape, world, pos, context);
-        }
+//        if (CartMod.DERAILING_CART_FIX_DEMO.isEnabled()) {
+//            return getOutlineShape(railCollisionShape, state, railShape, world, pos, context);
+//        }
         if (CartMod.DERAILING_CART_FIX.isEnabled()) {
             if (context instanceof EntityShapeContextAccessor entityContext) {
                 Entity entity = entityContext.getEntity();

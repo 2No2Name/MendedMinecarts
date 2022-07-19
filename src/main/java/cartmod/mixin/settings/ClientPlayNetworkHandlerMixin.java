@@ -16,7 +16,7 @@ public class ClientPlayNetworkHandlerMixin {
 
     @Inject(
             method = "onCustomPayload",
-            at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;)V", shift = At.Shift.BEFORE),
+            at = @At(value = "INVOKE", target = "Lorg/slf4j/Logger;warn(Ljava/lang/String;Ljava/lang/Object;)V", shift = At.Shift.BEFORE, remap = false),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD
     )

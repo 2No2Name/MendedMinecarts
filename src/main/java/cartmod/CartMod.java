@@ -19,24 +19,24 @@ import java.util.List;
 import java.util.Properties;
 
 public class CartMod implements ModInitializer {
-    // This logger is used to write text to the console and the log file.
-    // It is considered best practice to use your mod id as the logger's name.
-    // That way, it's clear which mod wrote info, warnings, and errors.
-    public static final Logger LOGGER = LoggerFactory.getLogger("cartmod");
-    //TODO USE MENDEDMINECARTS as name with bandaid logo
+	// This logger is used to write text to the console and the log file.
+	// It is considered best practice to use your mod id as the logger's name.
+	// That way, it's clear which mod wrote info, warnings, and errors.
+	public static final Logger LOGGER = LoggerFactory.getLogger("cartmod");
+	//TODO USE MENDEDMINECARTS as name with bandaid logo
 
-    public static final String SETTING_COMMAND = "cartmod";
+	public static final int SETTING_VERSION = 2;
+	public static final String SETTING_COMMAND = "cartmod";
 
-    public static final List<Setting> SETTINGS = new ArrayList<>();
-    public static final List<Setting> FLAT_SETTINGS = new ArrayList<>();
-    public static final int SETTING_VERSION = 1;
-    private static final String CONFIG_FILE = "./config/cartmod.properties";
+	public static final List<Setting> SETTINGS = new ArrayList<>();
+	public static final List<Setting> FLAT_SETTINGS = new ArrayList<>();
+	private static final String CONFIG_FILE = "./config/cartmod.properties";
 
-    public static <T extends Setting> T addSetting(T setting) {
-        SETTINGS.add(setting);
-        if (setting instanceof BooleanSettingGroup group) {
-            FLAT_SETTINGS.addAll(Arrays.asList(group.getChildren()));
-        } else {
+	public static <T extends Setting> T addSetting(T setting) {
+		SETTINGS.add(setting);
+		if (setting instanceof BooleanSettingGroup group) {
+			FLAT_SETTINGS.addAll(Arrays.asList(group.getChildren()));
+		} else {
             FLAT_SETTINGS.add(setting);
         }
 
@@ -72,7 +72,7 @@ public class CartMod implements ModInitializer {
 	public static BooleanSetting DISPLAY_CART_POSITION = addSetting(new BooleanSetting("DisplayCartPosition", false, new TranslatableText("cartmod.display_cart_position.description")));
 	public static DoubleSetting CUSTOM_RAIL_SPEED = addSetting(new DoubleSetting("CartSpeed", 8d / 20d, new TranslatableText("cartmod.custom_cart_speed.description")));
 	public static BooleanSetting DERAILING_CART_FIX = addSetting(new BooleanSetting("DerailingCartFix", false, new TranslatableText("cartmod.derailing_cart_fix.description")));
-	public static BooleanSetting DERAILING_CART_FIX_DEMO = addSetting(new BooleanSetting("DerailingCartFixDemo", false, new TranslatableText("cartmod.derailing_cart_fix_demo.description")));
+	//	public static BooleanSetting DERAILING_CART_FIX_DEMO = new BooleanSetting("DerailingCartFixDemo", false, new TranslatableText("cartmod.derailing_cart_fix_demo.description")));
 	public static BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, new TranslatableText("cartmod.rotate_cart_to_rail.description")));
 	//todo Issue: Needs client side code for client side rules
 
