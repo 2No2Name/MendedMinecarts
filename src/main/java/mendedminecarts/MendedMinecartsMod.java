@@ -1,9 +1,6 @@
 package mendedminecarts;
 
-import mendedminecarts.settings.BooleanSetting;
-import mendedminecarts.settings.BooleanSettingGroup;
-import mendedminecarts.settings.DoubleSetting;
-import mendedminecarts.settings.Setting;
+import mendedminecarts.settings.*;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.text.TranslatableText;
 import org.slf4j.Logger;
@@ -25,7 +22,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("mendedminecarts");
 	//TODO USE MENDEDMINECARTS as name with bandaid logo
 
-	public static final int SETTING_VERSION = 3;
+	public static final int SETTING_VERSION = 4;
 	public static final String SETTING_COMMAND = "mendedminecarts";
 	public static final double DATA_RENDER_DISTANCE_SQ = 25d * 25d;
 
@@ -77,6 +74,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting DERAILING_CART_FIX = addSetting(new BooleanSetting("DerailingCartFix", false, new TranslatableText("mendedminecarts.derailing_cart_fix.description")));
 	//	public static BooleanSetting DERAILING_CART_FIX_DEMO = new BooleanSetting("DerailingCartFixDemo", false, new TranslatableText("mendedminecarts.derailing_cart_fix_demo.description")));
 	public static final BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, new TranslatableText("mendedminecarts.rotate_cart_to_rail.description")));
+	public static final IntegerSetting DATA_PRECISION = addSetting(new IntegerSetting("DataPrecision", 4, new TranslatableText("mendedminecarts.data_precision.description")));
 
 	@Override
 	public void onInitialize() {

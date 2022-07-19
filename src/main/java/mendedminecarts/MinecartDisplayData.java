@@ -67,7 +67,7 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
     }
 
     public static String formatVec3d(Vec3d vec) {
-        return "(" + String.format("%.4f", vec.x) + ", " + String.format("%.4f", vec.y) + ", " + String.format("%.4f", vec.z) + ")";
+        return "(" + String.format(getDoubleFormatString(), vec.x) + ", " + String.format(getDoubleFormatString(), vec.y) + ", " + String.format(getDoubleFormatString(), vec.z) + ")";
     }
 
     public Text getDisplayVelocityText() {
@@ -86,14 +86,14 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
             speed *= 0.75;
         }
         speed = Math.min(speed, CartHelper.getMaxSpeed(this.entity()));
-        return new TranslatableText("mendedminecarts.speed").append(": ").append(String.format("%.4f", speed)).append(new TranslatableText("mendedminecarts.blocks_per_second"));
+        return new TranslatableText("mendedminecarts.speed").append(": ").append(String.format(getDoubleFormatString(), speed)).append(new TranslatableText("mendedminecarts.blocks_per_second"));
     }
 
     public Text getDisplayEstimatedDistanceText() {
         if (this.velocity() == null) {
             return new TranslatableText("mendedminecarts.estimated_distance").append(": ").append(new TranslatableText("mendedminecarts.unknown"));
         }
-        return new TranslatableText("mendedminecarts.estimated_distance").append(": ").append(String.format("%.4f", this.estimatedDistance())).append(new TranslatableText("mendedminecarts.blocks_distance"));
+        return new TranslatableText("mendedminecarts.estimated_distance").append(": ").append(String.format(getDoubleFormatString(), this.estimatedDistance())).append(new TranslatableText("mendedminecarts.blocks_distance"));
     }
 
     private static double estimateDistance(double velocity, AbstractMinecartEntity entity, double slowdownFactor) {
@@ -141,6 +141,10 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         return speedMultiplier;
     }
 
+    private static String getDoubleFormatString() {
+        return "%." + Math.abs(MendedMinecartsMod.DATA_PRECISION.getState()) + "f";
+    }
+
     public Optional<Text> getFillLevel() {
         if (this.fillLevel == -1) {
             return Optional.empty();
@@ -164,7 +168,7 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
             infoTexts.add(fillLevelText.get());
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_SLOWDOWN_RATE.isEnabled() && this.velocity() != null && MendedMinecartsMod.ACCURATE_CLIENT_MINECARTS.isEnabled()) {
-            infoTexts.add(new TranslatableText("mendedminecarts.slowdown_rate").append(": ").append(String.format("%.4f", this.slowdownFactor())));
+            infoTexts.add(new TranslatableText("mendedminecarts.slowdown_rate").append(": ").append(String.format(getDoubleFormatString(), this.slowdownFactor())));
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_ESTIMATED_DISTANCE.isEnabled() && this.velocity() != null) {
             infoTexts.add(this.getDisplayEstimatedDistanceText());
