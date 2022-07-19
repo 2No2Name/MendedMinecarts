@@ -23,7 +23,7 @@ public abstract class WorldRendererMixin_Client {
             at = @At("HEAD")
     )
     private <E extends Entity> void renderMinecartInfo(Entity entity, double cameraX, double cameraY, double cameraZ, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, CallbackInfo ci) {
-        if ((MendedMinecartsMod.DISPLAY_CART_POSITION.isEnabled()) && entity instanceof AbstractMinecartEntityAccess entityAccess) {
+        if ((MendedMinecartsMod.DISPLAY_CART_DATA_BOX.isEnabled()) && entity instanceof AbstractMinecartEntityAccess entityAccess) {
             MinecartDisplayData displayInfo = entityAccess.getDisplayInfo();
             if (displayInfo != null) {
                 Box box = displayInfo.lastReceivedPosBox();

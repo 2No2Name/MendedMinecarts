@@ -159,7 +159,7 @@ public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d veloc
         if (MendedMinecartsMod.DISPLAY_CART_DATA_FILL_LEVEL.isEnabled() && (fillLevelText = this.getFillLevel()).isPresent()) {
             infoTexts.add(fillLevelText.get());
         }
-        if (MendedMinecartsMod.DISPLAY_CART_DATA_SLOWDOWN_RATE.isEnabled() && this.velocity() != null) {
+        if (MendedMinecartsMod.DISPLAY_CART_DATA_SLOWDOWN_RATE.isEnabled() && this.velocity() != null && MendedMinecartsMod.ACCURATE_CLIENT_MINECARTS.isEnabled()) {
             infoTexts.add(new TranslatableText("mendedminecarts.slowdown_rate").append(": ").append(String.format("%.4f", this.slowdownFactor())));
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_ESTIMATED_DISTANCE.isEnabled() && this.velocity() != null) {
