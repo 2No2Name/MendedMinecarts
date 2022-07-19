@@ -4,7 +4,6 @@ import com.google.common.collect.Maps;
 import it.unimi.dsi.fastutil.objects.Object2ReferenceOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArraySet;
 import mendedminecarts.mixin.EntityShapeContextAccessor;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
 import net.minecraft.block.enums.RailShape;
 import net.minecraft.entity.Entity;
@@ -15,7 +14,6 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
 
 import java.util.Map;
 import java.util.Set;
@@ -78,7 +76,7 @@ public class RailHitboxHelper {
 //        return railCollisionShape;
 //    }
 
-    public static VoxelShape getCollisionShape(VoxelShape railCollisionShape, RailShape railShape, BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    public static VoxelShape getCollisionShape(VoxelShape railCollisionShape, RailShape railShape, BlockPos pos, ShapeContext context) {
 //        if (MendedMinecartsMod.DERAILING_CART_FIX_DEMO.isEnabled()) {
 //            return getOutlineShape(railCollisionShape, state, railShape, world, pos, context);
 //        }

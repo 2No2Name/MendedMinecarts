@@ -10,7 +10,6 @@ import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -19,14 +18,6 @@ public abstract class AbstractRailBlockMixin extends Block {
 
     @Shadow
     public abstract Property<RailShape> getShapeProperty();
-
-    @Shadow
-    @Final
-    protected static VoxelShape ASCENDING_SHAPE;
-
-    @Shadow
-    @Final
-    protected static VoxelShape STRAIGHT_SHAPE;
 
     public AbstractRailBlockMixin(Settings settings) {
         super(settings);
@@ -48,9 +39,10 @@ public abstract class AbstractRailBlockMixin extends Block {
 //        return RailHitboxHelper.getOutlineShape(railCollisionShape, state, state.get(this.getShapeProperty()), world, pos, context);
 //    }
 
+    @SuppressWarnings("deprecation")
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         VoxelShape railCollisionShape = super.getCollisionShape(state, world, pos, context);
-        return RailHitboxHelper.getCollisionShape(railCollisionShape, state.get(this.getShapeProperty()), state, world, pos, context);
+        return RailHitboxHelper.getCollisionShape(railCollisionShape, state.get(this.getShapeProperty()), pos, context);
     }
 }

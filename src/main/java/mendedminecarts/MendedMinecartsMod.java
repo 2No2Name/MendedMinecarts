@@ -43,16 +43,16 @@ public class MendedMinecartsMod implements ModInitializer {
 		return setting;
 	}
 
-	public static BooleanSetting DISPLAY_CART_DATA_POS = new BooleanSetting("Position", false, new TranslatableText("mendedminecarts.display_cart_data.position.description"));
-	public static BooleanSetting DISPLAY_CART_DATA_VELOCITY = new BooleanSetting("Velocity", false, new TranslatableText("mendedminecarts.display_cart_data.velocity.description"));
-	public static BooleanSetting DISPLAY_CART_DATA_SPEED = new BooleanSetting("Speed", false, new TranslatableText("mendedminecarts.display_cart_data.speed.description"));
-	public static BooleanSetting DISPLAY_CART_DATA_FILL_LEVEL = new BooleanSetting("FillLevel", false, new TranslatableText("mendedminecarts.display_cart_data.fill_level.description"));
-	public static BooleanSetting DISPLAY_CART_DATA_ON_GROUND = new BooleanSetting("OnGround", false, new TranslatableText("mendedminecarts.display_cart_data.on_ground.description"));
-	public static BooleanSetting DISPLAY_CART_DATA_IN_WATER = new BooleanSetting("InWater", false, new TranslatableText("mendedminecarts.display_cart_data.in_water.description"));
-	public static BooleanSetting DISPLAY_CART_DATA_SLOWDOWN_RATE = new BooleanSetting("SlowdownRate", false, new TranslatableText("mendedminecarts.display_cart_data.slowdown_rate.description"));
-	public static BooleanSetting DISPLAY_CART_DATA_ESTIMATED_DISTANCE = new BooleanSetting("EstimatedDistance", false, new TranslatableText("mendedminecarts.display_cart_data.estimated_distance.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_POS = new BooleanSetting("Position", false, new TranslatableText("mendedminecarts.display_cart_data.position.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_VELOCITY = new BooleanSetting("Velocity", false, new TranslatableText("mendedminecarts.display_cart_data.velocity.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_SPEED = new BooleanSetting("Speed", false, new TranslatableText("mendedminecarts.display_cart_data.speed.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_FILL_LEVEL = new BooleanSetting("FillLevel", false, new TranslatableText("mendedminecarts.display_cart_data.fill_level.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_ON_GROUND = new BooleanSetting("OnGround", false, new TranslatableText("mendedminecarts.display_cart_data.on_ground.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_IN_WATER = new BooleanSetting("InWater", false, new TranslatableText("mendedminecarts.display_cart_data.in_water.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_SLOWDOWN_RATE = new BooleanSetting("SlowdownRate", false, new TranslatableText("mendedminecarts.display_cart_data.slowdown_rate.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_ESTIMATED_DISTANCE = new BooleanSetting("EstimatedDistance", false, new TranslatableText("mendedminecarts.display_cart_data.estimated_distance.description"));
 
-	public static BooleanSettingGroup DISPLAY_CART_DATA = addSetting(
+	public static final BooleanSettingGroup DISPLAY_CART_DATA = addSetting(
 			new BooleanSettingGroup("DisplayCartData", false, new TranslatableText("mendedminecarts.display_cart_data.description"))
 					.children(
 							DISPLAY_CART_DATA_POS,
@@ -66,14 +66,14 @@ public class MendedMinecartsMod implements ModInitializer {
 					)
 	);
 
-	public static BooleanSetting ACCURATE_CLIENT_MINECARTS = addSetting(new BooleanSetting("AccurateClientMinecarts", false, new TranslatableText("mendedminecarts.accurate_client_minecarts.description")));
-	public static BooleanSetting NO_CLIENT_CART_INTERPOLATION = addSetting(new BooleanSetting("NoClientCartInterpolation", false, new TranslatableText("mendedminecarts.no_cart_interpolation.description")));
-	public static BooleanSetting ALWAYS_SYNC_CART_POSITION = addSetting(new BooleanSetting("AlwaysSyncCartPosition", false, new TranslatableText("mendedminecarts.always_sync_cart_position.description")));
-	public static BooleanSetting DISPLAY_CART_POSITION = addSetting(new BooleanSetting("DisplayCartPosition", false, new TranslatableText("mendedminecarts.display_cart_position.description")));
-	public static DoubleSetting CUSTOM_RAIL_SPEED = addSetting(new DoubleSetting("CartSpeed", 8d / 20d, new TranslatableText("mendedminecarts.custom_cart_speed.description")));
-	public static BooleanSetting DERAILING_CART_FIX = addSetting(new BooleanSetting("DerailingCartFix", false, new TranslatableText("mendedminecarts.derailing_cart_fix.description")));
+	public static final BooleanSetting ACCURATE_CLIENT_MINECARTS = addSetting(new BooleanSetting("AccurateClientMinecarts", false, new TranslatableText("mendedminecarts.accurate_client_minecarts.description")));
+	public static final BooleanSetting NO_CLIENT_CART_INTERPOLATION = addSetting(new BooleanSetting("NoClientCartInterpolation", false, new TranslatableText("mendedminecarts.no_cart_interpolation.description")));
+	public static final BooleanSetting ALWAYS_SYNC_CART_POSITION = addSetting(new BooleanSetting("AlwaysSyncCartPosition", false, new TranslatableText("mendedminecarts.always_sync_cart_position.description")));
+	public static final BooleanSetting DISPLAY_CART_POSITION = addSetting(new BooleanSetting("DisplayCartPosition", false, new TranslatableText("mendedminecarts.display_cart_position.description")));
+	public static final DoubleSetting CUSTOM_RAIL_SPEED = addSetting(new DoubleSetting("CartSpeed", 8d / 20d, new TranslatableText("mendedminecarts.custom_cart_speed.description")));
+	public static final BooleanSetting DERAILING_CART_FIX = addSetting(new BooleanSetting("DerailingCartFix", false, new TranslatableText("mendedminecarts.derailing_cart_fix.description")));
 	//	public static BooleanSetting DERAILING_CART_FIX_DEMO = new BooleanSetting("DerailingCartFixDemo", false, new TranslatableText("mendedminecarts.derailing_cart_fix_demo.description")));
-	public static BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, new TranslatableText("mendedminecarts.rotate_cart_to_rail.description")));
+	public static final BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, new TranslatableText("mendedminecarts.rotate_cart_to_rail.description")));
 	//todo Issue: Needs client side code for client side rules
 
 	@Override

@@ -3,7 +3,6 @@ package mendedminecarts.mixin;
 import mendedminecarts.AbstractMinecartEntityAccess;
 import mendedminecarts.MendedMinecartsMod;
 import mendedminecarts.MinecartDisplayData;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
@@ -59,8 +58,6 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
                 matrices.multiply(this.dispatcher.getRotation());
                 matrices.scale(-0.025f, -0.025f, 0.025f);
                 Matrix4f matrix4f = matrices.peek().getPositionMatrix();
-                float g = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f);
-                int j = (int)(g * 255.0f) << 24;
                 float h = -textRenderer.getWidth(infoText) / 2f;
                 textRenderer.draw(infoText, h, yOffset, -1, false, matrix4f, vertexConsumerProvider, true, 0, light);
 

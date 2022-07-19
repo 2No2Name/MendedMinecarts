@@ -36,16 +36,19 @@ public class BooleanSettingGroup extends BooleanSetting {
 
     @Override
     public Text asText() {
+        //TODO
         return super.asText();
     }
 
     @Override
     public Text getDefault() {
-        return super.asText();
+        //TODO
+        return super.getDefault();
     }
 
     @Override
     public Text getDescription() {
+        //TODO
         return super.getDescription();
     }
 
