@@ -33,7 +33,7 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
     private void renderInfo(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
         if (MendedMinecartsMod.DISPLAY_CART_DATA.isEnabled() && entity instanceof AbstractMinecartEntityAccess entityAccess) {
             double d = this.dispatcher.getSquaredDistanceToCamera(entity);
-            if (d > 625.0) {
+            if (d > MendedMinecartsMod.DATA_RENDER_DISTANCE_SQ) {
                 return;
             }
 

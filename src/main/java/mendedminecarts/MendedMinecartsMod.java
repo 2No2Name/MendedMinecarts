@@ -27,6 +27,7 @@ public class MendedMinecartsMod implements ModInitializer {
 
 	public static final int SETTING_VERSION = 2;
 	public static final String SETTING_COMMAND = "mendedminecarts";
+	public static final double DATA_RENDER_DISTANCE_SQ = 25d * 25d;
 
 	public static final List<Setting> SETTINGS = new ArrayList<>();
 	public static final List<Setting> FLAT_SETTINGS = new ArrayList<>();

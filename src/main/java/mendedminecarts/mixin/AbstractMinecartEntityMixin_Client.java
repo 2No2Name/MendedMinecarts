@@ -63,15 +63,22 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 			at = @At("HEAD")
 	)
 	private void updateDisplayInfo(CallbackInfo ci) {
-		if (MendedMinecartsMod.DISPLAY_CART_DATA.isEnabled() && this.world.isClient && MinecraftClient.getInstance().player != null && MinecraftClient.getInstance().player.hasPermissionLevel(2)) {
+		if (!this.world.isClient()) {
+			return;
+		}
+		if (MendedMinecartsMod.DISPLAY_CART_DATA.isEnabled() &&
+				MinecraftClient.getInstance().player != null &&
+				MinecraftClient.getInstance().player.hasPermissionLevel(2) &&
+				MinecraftClient.getInstance().getEntityRenderDispatcher().getSquaredDistanceToCamera(this) < MendedMinecartsMod.DATA_RENDER_DISTANCE_SQ) {
 			MinecraftClient.getInstance().player.networkHandler.getDataQueryHandler().queryEntityNbt(this.getId(), nbt -> {
 				try {
 					this.displayData = MinecartDisplayData.fromNBT(this, nbt);
 				} catch (Exception e) {
+					this.displayData = null;
 					e.printStackTrace();
 				}
 			});
-		} else if (this.world.isClient()) {
+		} else {
 			this.displayData = null;
 		}
 	}
