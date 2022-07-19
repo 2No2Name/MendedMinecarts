@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "mendedminecarts.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "AbstractBlockSettingAccessor",
+    "AbstractMinecartEntityMixin_ConfiguredSpeed",
+    "AbstractMinecartEntityMixin_DerailFix",
+    "AbstractMinecartEntityMixin_YawFix",
+    "AbstractRailBlockMixin",
+    "BlocksMixin",
+    "CommandManagerMixin",
+    "DataQueryHandlerMixin",
+    "EntityShapeContextAccessor",
+    "EntityTrackerEntryMixin",
+    "MinecartEntityRendererMixin",
+    "settings.ClientPlayNetworkHandlerMixin",
+    "settings.PlayerManagerMixin"
+  ],
+  "client": [
+    "AbstractMinecartEntityMixin_Client",
+    "WorldRendererMixin_Client"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

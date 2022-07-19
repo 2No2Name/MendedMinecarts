@@ -1,9 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "cartmod",
+  "id": "mendedminecarts",
   "version": "${version}",
-
-  "name": "Cart Mod",
+  "name": "Mended Minecarts",
   "description": "We have the best minecarts!",
   "authors": [
     "2No2Name",
@@ -13,18 +12,16 @@
     "homepage": "https://fabricmc.net/",
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
-
   "license": "",
-  "icon": "assets/cartmod/icon.png",
-
+  "icon": "assets/mendedminecarts/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "cartmod.CartMod"
+      "mendedminecarts.MendedMinecartsMod"
     ]
   },
   "mixins": [
-    "cartmod.mixins.json"
+    "mendedminecarts.mixins.json"
   ],
 
   "depends": {
