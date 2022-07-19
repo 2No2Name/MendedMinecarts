@@ -120,7 +120,7 @@ public record MinecartDisplayData(Vec3d pos, Box lastReceivedPosBox, Vec3d veloc
     private static double getSlowdown(Entity entity, NbtCompound nbt, int fillLevel) {
         double speedMultiplier = entity.hasPassengers() ? 0.997 : 0.96;
         if (entity instanceof StorageMinecartEntity) {
-            if (nbt.getString("LootTable") == null) {
+            if (!nbt.contains("LootTable")) {
                 int i = 15 - fillLevel;
                 speedMultiplier = 0.98f + (float) i * 0.001f;
             } else {
