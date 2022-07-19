@@ -67,7 +67,7 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
     }
 
     public static String formatVec3d(Vec3d vec) {
-        return "(" + String.format("%.4f", vec.x) + ", " + String.format("%.2f", vec.y) + ", " + String.format("%.2f", vec.z) + ")";
+        return "(" + String.format("%.4f", vec.x) + ", " + String.format("%.4f", vec.y) + ", " + String.format("%.4f", vec.z) + ")";
     }
 
     public Text getDisplayVelocityText() {
