@@ -7,7 +7,7 @@
   "mendedminecarts.derailing_cart_fix.description": "Carts do not derail anymore.",
   "mendedminecarts.default": "default",
   "mendedminecarts.pos": "Pos",
-  "mendedminecarts.velocity": "Speed",
+  "mendedminecarts.velocity": "Velocity",
   "mendedminecarts.onGround": "OnGround",
   "mendedminecarts.custom_cart_speed.description": "Sets minecarts to a custom speed limit when on rails.",
   "mendedminecarts.estimated_distance": "Est.Distance",
@@ -28,6 +28,7 @@
   "mendedminecarts.derailing_cart_fix_demo.description": "Prevents minecarts from derailing",
   "mendedminecarts.rotate_cart_to_rail.description": "Rotates minecarts on non-curved rails to fix unexpected pushing behavior of minecarts",
   "mendedminecarts.blocks_per_second": "m/s",
+  "mendedminecarts.speed": "Speed",
   "mendedminecarts.unknown": "unknown",
   "mendedminecarts.data_precision.description": "Number of digits when displaying floating point values."
 }
