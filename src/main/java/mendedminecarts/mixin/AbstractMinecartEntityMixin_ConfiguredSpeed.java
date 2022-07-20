@@ -51,6 +51,9 @@ public abstract class AbstractMinecartEntityMixin_ConfiguredSpeed {
             ordinal = 0
     )
     private int clampXDistance(int x, BlockPos pos) {
+        if (MendedMinecartsMod.CUSTOM_RAIL_SPEED.isDefault()) {
+            return x;
+        }
         int difference = MathHelper.clamp(x - pos.getX(), -1, 1);
         return pos.getX() + difference;
     }
@@ -70,6 +73,9 @@ public abstract class AbstractMinecartEntityMixin_ConfiguredSpeed {
             ordinal = 1
     )
     private int clampZDistance(int z, BlockPos pos) {
+        if (MendedMinecartsMod.CUSTOM_RAIL_SPEED.isDefault()) {
+            return z;
+        }
         int difference = MathHelper.clamp(z - pos.getZ(), -1, 1);
         return pos.getZ() + difference;
     }
