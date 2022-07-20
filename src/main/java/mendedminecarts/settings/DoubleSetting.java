@@ -15,16 +15,21 @@ public class DoubleSetting implements Setting {
     private double state;
     public final double defaultState;
     public final Text description;
+    private final double minValue, maxValue;
 
-    public DoubleSetting(String name, double defaultState, Text description) {
+    public DoubleSetting(String name, double defaultState, Text description, double minValue, double maxValue) {
         this.name = name;
         this.defaultState = defaultState;
         this.state = defaultState;
         this.description = description;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
     }
 
     public void setDouble(double state) {
-        this.state = state;
+        if (state >= this.minValue && state <= this.maxValue) {
+            this.state = state;
+        }
     }
 
     public double getState() {
@@ -57,7 +62,7 @@ public class DoubleSetting implements Setting {
             commandContext.getSource().sendFeedback(this.asText(), false);
             commandContext.getSource().sendFeedback(this.getDefault(), false);
             return 1;
-        }).then(CommandManager.argument("state", DoubleArgumentType.doubleArg()).executes((context) -> {
+        }).then(CommandManager.argument("state", DoubleArgumentType.doubleArg(this.minValue, this.maxValue)).executes((context) -> {
             this.setDouble(context.getArgument("state", Double.class));
             this.onChangedByCommand();
             context.getSource().sendFeedback(this.asText(), false);
