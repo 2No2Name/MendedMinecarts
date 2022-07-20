@@ -3,6 +3,7 @@ package mendedminecarts;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.FurnaceMinecartEntity;
+import net.minecraft.entity.vehicle.HopperMinecartEntity;
 import net.minecraft.entity.vehicle.StorageMinecartEntity;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
@@ -22,7 +23,8 @@ import java.util.Optional;
  * Stores last received server side minecart data
  */
 public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, boolean onGround, int fillLevel,
-                                  double slowdownFactor, double estimatedDistance, AbstractMinecartEntity entity) {
+                                  double slowdownFactor, double estimatedDistance, boolean hopperLocked, float wobble,
+                                  AbstractMinecartEntity entity) {
 
     public static MinecartDisplayData fromNBT(AbstractMinecartEntityAccess entity, NbtCompound nbt) {
         NbtList nbtPos = nbt.getList("Pos", 6);
@@ -37,12 +39,15 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
 
         int fillLevel = entity instanceof StorageMinecartEntity inventory ? getComparatorOutput(inventory, nbt) : -1;
 
+        boolean hopperLocked = entity instanceof HopperMinecartEntity && !(nbt.contains("Enabled") && nbt.getBoolean("Enabled"));
+        float wobble = ((AbstractMinecartEntity) entity).getDamageWobbleStrength();
+
         double slowdown = getSlowdown((Entity) entity, nbt, fillLevel);
         double estimatedDistance = estimateDistance(velocity.length(), (AbstractMinecartEntity) entity, slowdown);
 
 
         Box boxAt = ((Entity) entity).getType().getDimensions().getBoxAt(pos.x, pos.y, pos.z);
-        return new MinecartDisplayData(pos, boxAt, velocity, onGround, fillLevel, slowdown, estimatedDistance, (AbstractMinecartEntity) entity);
+        return new MinecartDisplayData(pos, boxAt, velocity, onGround, fillLevel, slowdown, estimatedDistance, hopperLocked, wobble, (AbstractMinecartEntity) entity);
     }
 
     private static int getComparatorOutput(StorageMinecartEntity inventory, NbtCompound nbtCompound) {
@@ -178,6 +183,12 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_ON_GROUND.isEnabled()) {
             infoTexts.add(new TranslatableText("mendedminecarts.onGround").append(": ").append(String.valueOf(this.onGround())));
+        }
+        if (MendedMinecartsMod.DISPLAY_CART_DATA_WOBBLE.isEnabled()) {
+            infoTexts.add(new TranslatableText("mendedminecarts.wobble").append(": ").append(String.format(getDoubleFormatString(), this.wobble())));
+        }
+        if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_CART_LOCKED.isEnabled()) {
+            infoTexts.add(new TranslatableText("mendedminecarts.hopper_locked").append(": ").append(String.valueOf(this.hopperLocked())));
         }
 
 
