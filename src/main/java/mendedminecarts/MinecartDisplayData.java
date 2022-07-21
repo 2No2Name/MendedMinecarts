@@ -90,7 +90,7 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         if (this.entity().hasPassengers()) {
             speed *= 0.75;
         }
-        speed = Math.min(speed, CartHelper.getMaxSpeed(this.entity()));
+        speed = Math.min(speed, 20d * CartHelper.getMaxSpeed(this.entity()));
         return new TranslatableText("mendedminecarts.speed").append(": ").append(String.format(getDoubleFormatString(), speed)).append(new TranslatableText("mendedminecarts.blocks_per_second"));
     }
 
