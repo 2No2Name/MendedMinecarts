@@ -69,7 +69,7 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 		if (MendedMinecartsMod.DISPLAY_CART_DATA.isEnabled() &&
 				MinecraftClient.getInstance().player != null &&
 				MinecraftClient.getInstance().player.hasPermissionLevel(2) &&
-				MinecraftClient.getInstance().getEntityRenderDispatcher().getSquaredDistanceToCamera(this) < MendedMinecartsMod.DATA_RENDER_DISTANCE_SQ) {
+				MinecraftClient.getInstance().player.getPos().squaredDistanceTo(this.getPos()) < MendedMinecartsMod.DATA_RENDER_DISTANCE_SQ) {
 			MinecraftClient.getInstance().player.networkHandler.getDataQueryHandler().queryEntityNbt(this.getId(), nbt -> {
 				try {
 					this.displayData = MinecartDisplayData.fromNBT(this, nbt);
