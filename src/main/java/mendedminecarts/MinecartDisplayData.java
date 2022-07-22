@@ -187,7 +187,7 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         if (MendedMinecartsMod.DISPLAY_CART_DATA_WOBBLE.isEnabled()) {
             infoTexts.add(new TranslatableText("mendedminecarts.wobble").append(": ").append(String.format(getDoubleFormatString(), this.wobble())));
         }
-        if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_CART_LOCKED.isEnabled()) {
+        if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_CART_LOCKED.isEnabled() && this.entity() instanceof HopperMinecartEntity) {
             infoTexts.add(new TranslatableText("mendedminecarts.hopper_locked").append(": ").append(String.valueOf(this.hopperLocked())));
         }
 
