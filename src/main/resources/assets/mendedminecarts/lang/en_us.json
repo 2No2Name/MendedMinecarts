@@ -5,6 +5,7 @@
   "mendedminecarts.no_cart_interpolation.description": "Disables the client interpolation capability. Instead position packets set the client side cart position like with other entities.",
   "mendedminecarts.always_sync_cart_position.description": "Server sends the minecart position to the client every tick.",
   "mendedminecarts.derailing_cart_fix.description": "Carts do not derail anymore.",
+  "mendedminecarts.explode_rail_fix.description": "TNT Carts do not blow up rails when hitting a wall or being hit by fire projectiles.",
   "mendedminecarts.default": "default",
   "mendedminecarts.pos": "Pos",
   "mendedminecarts.velocity": "Velocity",

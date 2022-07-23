@@ -15,6 +15,7 @@
     "EntityShapeContextAccessor",
     "EntityTrackerEntryMixin",
     "MinecartEntityRendererMixin",
+    "TntMinecartEntityMixin",
     "settings.ClientPlayNetworkHandlerMixin",
     "settings.PlayerManagerMixin"
   ],
