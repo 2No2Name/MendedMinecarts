@@ -12,9 +12,11 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.shape.VoxelShape;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -193,6 +195,38 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
 
 
         return infoTexts;
+    }
+
+    public Box[] hopperPickupArea1() {
+        if (!(this.entity() instanceof HopperMinecartEntity hopper)) {
+            return new Box[0];
+        }
+        VoxelShape inputAreaShape = hopper.getInputAreaShape();
+        return (Box[]) inputAreaShape.getBoundingBoxes().stream().map(box -> box.offset(this.pos.x - 0.5, this.pos.y + 0.5 - 0.5, this.pos.z - 0.5)).toArray();
+    }
+
+    public Box hopperPickupArea2() {
+        if (!(this.entity() instanceof HopperMinecartEntity)) {
+            return null;
+        }
+        return this.boundingBox().expand(0.25, 0.0, 0.25);
+    }
+
+    public BlockPos hopperExtractBlock() {
+        if (!(this.entity() instanceof HopperMinecartEntity)) {
+            return null;
+        }
+        return new BlockPos(this.pos.x, this.pos.y + 0.5 + 1.0, this.pos.z);
+    }
+
+    public Box hopperExtractBox() {
+        if (!(this.entity() instanceof HopperMinecartEntity)) {
+            return null;
+        }
+        double x = this.pos.x;
+        double y = this.pos.y + 0.5 + 1.0;
+        double z = this.pos.z;
+        return new Box(x - 0.5, y - 0.5, z - 0.5, x + 0.5, y + 0.5, z + 0.5);
     }
 
     private boolean inWater() {

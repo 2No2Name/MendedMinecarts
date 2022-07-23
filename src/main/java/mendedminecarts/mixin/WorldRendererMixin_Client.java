@@ -10,6 +10,7 @@ import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,20 +31,53 @@ public abstract class WorldRendererMixin_Client {
             at = @At("HEAD")
     )
     private <E extends Entity> void renderMinecartInfo(Entity entity, double cameraX, double cameraY, double cameraZ, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, CallbackInfo ci) {
-        if ((MendedMinecartsMod.DISPLAY_CART_DATA_BOX.isEnabled()) && entity instanceof AbstractMinecartEntityAccess entityAccess) {
+        if (
+                (
+                        MendedMinecartsMod.DISPLAY_CART_DATA_BOX.isEnabled() ||
+                                MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_PICKUP_VOLUME.isEnabled() ||
+                                MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_EXTRACT_VOLUME.isEnabled() ||
+                                MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_EXTRACT_BLOCK.isEnabled()
+                ) && entity instanceof AbstractMinecartEntityAccess entityAccess) {
             if (this.entityRenderDispatcher.getSquaredDistanceToCamera(entity) > MendedMinecartsMod.DATA_RENDER_DISTANCE_SQ) {
                 return;
             }
             MinecartDisplayData displayInfo = entityAccess.getDisplayInfo();
             if (displayInfo != null) {
-                Box box = displayInfo.boundingBox();
-                if (box != null) {
-                    matrices.push();
-                    matrices.translate(-cameraX, -cameraY, -cameraZ);
-                    VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getLines());
-                    WorldRenderer.drawBox(matrices, buffer, box, 0.5f, 0.5f, 1.0f, 1.0f);
-                    matrices.pop();
+                VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayer.getLines());
+                matrices.push();
+                matrices.translate(-cameraX, -cameraY, -cameraZ);
+
+                if (MendedMinecartsMod.DISPLAY_CART_DATA_BOX.isEnabled()) {
+                    Box box = displayInfo.boundingBox();
+                    if (box != null) {
+                        WorldRenderer.drawBox(matrices, buffer, box, 0.5f, 0.5f, 1.0f, 1.0f);
+                    }
                 }
+                if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_PICKUP_VOLUME.isEnabled()) {
+                    Box pickupArea2 = displayInfo.hopperPickupArea2();
+                    if (pickupArea2 != null) {
+                        WorldRenderer.drawBox(matrices, buffer, pickupArea2, 0.7f, 0.3f, 0.3f, 1.0f);
+                    }
+
+                    Box[] pickupArea1 = displayInfo.hopperPickupArea1();
+                    for (Box pickupArea : pickupArea1) {
+                        WorldRenderer.drawBox(matrices, buffer, pickupArea, 0.7f, 0.3f, 0.3f, 1.0f);
+                    }
+                }
+                if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_EXTRACT_BLOCK.isEnabled()) {
+                    BlockPos pos = displayInfo.hopperExtractBlock();
+                    if (pos != null) {
+                        WorldRenderer.drawBox(matrices, buffer, new Box(pos), 0.3f, 0.7f, 0.3f, 1.0f);
+                    }
+                }
+                if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_EXTRACT_VOLUME.isEnabled()) {
+                    Box box = displayInfo.hopperExtractBox();
+                    if (box != null) {
+                        WorldRenderer.drawBox(matrices, buffer, box, 0.3f, 0.3f, 0.7f, 1.0f);
+                    }
+                }
+
+                matrices.pop();
             }
         }
     }
