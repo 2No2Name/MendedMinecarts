@@ -59,9 +59,11 @@ public abstract class WorldRendererMixin_Client {
                         WorldRenderer.drawBox(matrices, buffer, pickupArea2, 0.7f, 0.3f, 0.3f, 1.0f);
                     }
 
-                    Box[] pickupArea1 = displayInfo.hopperPickupArea1();
-                    for (Box pickupArea : pickupArea1) {
-                        WorldRenderer.drawBox(matrices, buffer, pickupArea, 0.7f, 0.3f, 0.3f, 1.0f);
+                    Object[] pickupArea1 = displayInfo.hopperPickupArea1();
+                    for (Object pickupArea : pickupArea1) {
+                        if (pickupArea instanceof Box box) {
+                            WorldRenderer.drawBox(matrices, buffer, box, 0.7f, 0.3f, 0.3f, 1.0f);
+                        }
                     }
                 }
                 if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_EXTRACT_BLOCK.isEnabled()) {

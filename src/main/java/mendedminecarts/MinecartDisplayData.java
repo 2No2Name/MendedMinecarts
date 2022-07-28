@@ -197,12 +197,12 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         return infoTexts;
     }
 
-    public Box[] hopperPickupArea1() {
+    public Object[] hopperPickupArea1() {
         if (!(this.entity() instanceof HopperMinecartEntity hopper)) {
             return new Box[0];
         }
         VoxelShape inputAreaShape = hopper.getInputAreaShape();
-        return (Box[]) inputAreaShape.getBoundingBoxes().stream().map(box -> box.offset(this.pos.x - 0.5, this.pos.y + 0.5 - 0.5, this.pos.z - 0.5)).toArray();
+        return inputAreaShape.getBoundingBoxes().stream().map(box -> box.offset(this.pos.x - 0.5, this.pos.y + 0.5 - 0.5, this.pos.z - 0.5)).toArray();
     }
 
     public Box hopperPickupArea2() {
