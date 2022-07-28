@@ -5,7 +5,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.vehicle.TntMinecartEntity;
-import net.minecraft.tag.BlockTags;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -33,7 +32,7 @@ public abstract class TntMinecartEntityMixin extends Entity {
             )
     )
     private void setFuseFixBlowupRail(CallbackInfo ci) {
-        if (MendedMinecartsMod.EXPLODING_CART_FIX.isEnabled() && this.getBlockStateAtPos().isIn(BlockTags.RAILS)) {
+        if (MendedMinecartsMod.EXPLODING_CART_FIX.isEnabled()) {
             this.fuseTicks = 0;
         }
     }
@@ -47,7 +46,7 @@ public abstract class TntMinecartEntityMixin extends Entity {
             )
     )
     private void setFuseFixBlowupRail1(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (MendedMinecartsMod.EXPLODING_CART_FIX.isEnabled() && this.getBlockStateAtPos().isIn(BlockTags.RAILS)) {
+        if (MendedMinecartsMod.EXPLODING_CART_FIX.isEnabled()) {
             this.fuseTicks = 0;
         }
     }
