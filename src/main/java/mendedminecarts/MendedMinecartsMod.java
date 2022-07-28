@@ -82,7 +82,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting ACCURATE_CLIENT_MINECARTS = addSetting(new BooleanSetting("AccurateClientMinecarts", false, new TranslatableText("mendedminecarts.accurate_client_minecarts.description")));
 	public static final BooleanSetting NO_CLIENT_CART_INTERPOLATION = addSetting(new BooleanSetting("NoClientCartInterpolation", false, new TranslatableText("mendedminecarts.no_cart_interpolation.description")));
 	public static final BooleanSetting ALWAYS_SYNC_CART_POSITION = addSetting(new BooleanSetting("AlwaysSyncCartPosition", false, new TranslatableText("mendedminecarts.always_sync_cart_position.description")));
-	public static final DoubleSetting CART_SPEED = addSetting(new DoubleSetting("CartSpeed", 8d / 20d, new TranslatableText("mendedminecarts.custom_cart_speed.description"), 0d, 5000d));
+	public static final DoubleSetting CART_SPEED = addSetting(new DoubleSetting("CartSpeed", 8d / 20d, new TranslatableText("mendedminecarts.custom_cart_speed.description"), 0d, Double.POSITIVE_INFINITY));
 	public static final BooleanSetting DERAILING_CART_FIX = addSetting(new BooleanSetting("DerailingCartFix", false, new TranslatableText("mendedminecarts.derailing_cart_fix.description")));
 	//	public static BooleanSetting DERAILING_CART_FIX_DEMO = new BooleanSetting("DerailingCartFixDemo", false, new TranslatableText("mendedminecarts.derailing_cart_fix_demo.description")));
 	public static final BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, new TranslatableText("mendedminecarts.rotate_cart_to_rail.description")));
