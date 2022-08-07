@@ -4,9 +4,7 @@ import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 import java.util.Properties;
 
@@ -43,12 +41,12 @@ public class DoubleSetting implements Setting {
 
     @Override
     public Text asText() {
-        return new LiteralText(name).append(": ").append(new LiteralText(String.valueOf(state)));
+        return Text.literal(name).append(": ").append(Text.literal(String.valueOf(state)));
     }
 
     @Override
     public Text getDefault() {
-        return new TranslatableText("mendedminecarts.default").append(": ").append(String.valueOf(defaultState));
+        return Text.translatable("mendedminecarts.default").append(": ").append(String.valueOf(defaultState));
     }
 
     @Override

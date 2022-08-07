@@ -5,8 +5,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import mendedminecarts.settings.Setting;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 /**
  * Class for the /counter command which allows to use hoppers pointing into wool
@@ -27,15 +26,14 @@ public class MendedMinecartsSettingCommand {
     }
 
 
-    private static int listSettings(ServerCommandSource source)
-    {
-        source.sendFeedback(new TranslatableText("mendedminecarts.available_settings"), false);
-        source.sendFeedback(new TranslatableText(""), false);
+    private static int listSettings(ServerCommandSource source) {
+        source.sendFeedback(Text.translatable("mendedminecarts.available_settings"), false);
+        source.sendFeedback(Text.translatable(""), false);
         for (Setting setting : MendedMinecartsMod.SETTINGS) {
             source.sendFeedback(setting.asText(), false);
             source.sendFeedback(setting.getDefault(), false);
             source.sendFeedback(setting.getDescription(), false);
-            source.sendFeedback(new LiteralText(""), false);
+            source.sendFeedback(Text.literal(""), false);
         }
         return 1;
     }

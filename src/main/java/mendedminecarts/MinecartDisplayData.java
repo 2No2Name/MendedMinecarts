@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -68,9 +67,9 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
 
     public Text getDisplayPosText() {
         if (this.pos() == null) {
-            return new TranslatableText("mendedminecarts.pos").append(": ").append(new TranslatableText("mendedminecarts.unknown"));
+            return Text.translatable("mendedminecarts.pos").append(": ").append(Text.translatable("mendedminecarts.unknown"));
         }
-        return new TranslatableText("mendedminecarts.pos").append(": ").append(formatVec3d(this.pos()));
+        return Text.translatable("mendedminecarts.pos").append(": ").append(formatVec3d(this.pos()));
     }
 
     public static String formatVec3d(Vec3d vec) {
@@ -79,28 +78,28 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
 
     public Text getDisplayVelocityText() {
         if (this.velocity() == null) {
-            return new TranslatableText("mendedminecarts.velocity").append(": ").append(new TranslatableText("mendedminecarts.unknown"));
+            return Text.translatable("mendedminecarts.velocity").append(": ").append(Text.translatable("mendedminecarts.unknown"));
         }
-        return new TranslatableText("mendedminecarts.velocity").append(": ").append(formatVec3d(this.velocity()));
+        return Text.translatable("mendedminecarts.velocity").append(": ").append(formatVec3d(this.velocity()));
     }
 
     public Text getDisplaySpeedText() {
         if (this.velocity() == null) {
-            return new TranslatableText("mendedminecarts.speed").append(": ").append(new TranslatableText("mendedminecarts.unknown"));
+            return Text.translatable("mendedminecarts.speed").append(": ").append(Text.translatable("mendedminecarts.unknown"));
         }
         double speed = this.velocity().multiply(20d).length();
         if (this.entity().hasPassengers()) {
             speed *= 0.75;
         }
         speed = Math.min(speed, 20d * CartHelper.getMaxSpeed(this.entity()));
-        return new TranslatableText("mendedminecarts.speed").append(": ").append(String.format(getDoubleFormatString(), speed)).append(new TranslatableText("mendedminecarts.blocks_per_second"));
+        return Text.translatable("mendedminecarts.speed").append(": ").append(String.format(getDoubleFormatString(), speed)).append(Text.translatable("mendedminecarts.blocks_per_second"));
     }
 
     public Text getDisplayEstimatedDistanceText() {
         if (this.velocity() == null) {
-            return new TranslatableText("mendedminecarts.estimated_distance").append(": ").append(new TranslatableText("mendedminecarts.unknown"));
+            return Text.translatable("mendedminecarts.estimated_distance").append(": ").append(Text.translatable("mendedminecarts.unknown"));
         }
-        return new TranslatableText("mendedminecarts.estimated_distance").append(": ").append(String.format(getDoubleFormatString(), this.estimatedDistance())).append(new TranslatableText("mendedminecarts.blocks_distance"));
+        return Text.translatable("mendedminecarts.estimated_distance").append(": ").append(String.format(getDoubleFormatString(), this.estimatedDistance())).append(Text.translatable("mendedminecarts.blocks_distance"));
     }
 
     private static double estimateDistance(double velocity, AbstractMinecartEntity entity, double slowdownFactor) {
@@ -156,7 +155,7 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         if (this.fillLevel == -1) {
             return Optional.empty();
         }
-        return Optional.of(new TranslatableText("mendedminecarts.fill_level").append(": ").append(String.valueOf(this.fillLevel)));
+        return Optional.of(Text.translatable("mendedminecarts.fill_level").append(": ").append(String.valueOf(this.fillLevel)));
     }
 
     public ArrayList<Text> getInfoTexts() {
@@ -175,22 +174,22 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
             infoTexts.add(fillLevelText.get());
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_SLOWDOWN_RATE.isEnabled() && this.velocity() != null && MendedMinecartsMod.ACCURATE_CLIENT_MINECARTS.isEnabled()) {
-            infoTexts.add(new TranslatableText("mendedminecarts.slowdown_rate").append(": ").append(String.format(getDoubleFormatString(), this.slowdownFactor())));
+            infoTexts.add(Text.translatable("mendedminecarts.slowdown_rate").append(": ").append(String.format(getDoubleFormatString(), this.slowdownFactor())));
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_ESTIMATED_DISTANCE.isEnabled() && this.velocity() != null) {
             infoTexts.add(this.getDisplayEstimatedDistanceText());
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_IN_WATER.isEnabled() && MendedMinecartsMod.ACCURATE_CLIENT_MINECARTS.isEnabled()) {
-            infoTexts.add(new TranslatableText("mendedminecarts.in_water").append(": ").append(String.valueOf(this.inWater())));
+            infoTexts.add(Text.translatable("mendedminecarts.in_water").append(": ").append(String.valueOf(this.inWater())));
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_ON_GROUND.isEnabled()) {
-            infoTexts.add(new TranslatableText("mendedminecarts.onGround").append(": ").append(String.valueOf(this.onGround())));
+            infoTexts.add(Text.translatable("mendedminecarts.onGround").append(": ").append(String.valueOf(this.onGround())));
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_WOBBLE.isEnabled()) {
-            infoTexts.add(new TranslatableText("mendedminecarts.wobble").append(": ").append(String.format(getDoubleFormatString(), this.wobble())));
+            infoTexts.add(Text.translatable("mendedminecarts.wobble").append(": ").append(String.format(getDoubleFormatString(), this.wobble())));
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_CART_LOCKED.isEnabled() && this.entity() instanceof HopperMinecartEntity) {
-            infoTexts.add(new TranslatableText("mendedminecarts.hopper_locked").append(": ").append(String.valueOf(this.hopperLocked())));
+            infoTexts.add(Text.translatable("mendedminecarts.hopper_locked").append(": ").append(String.valueOf(this.hopperLocked())));
         }
 
 
