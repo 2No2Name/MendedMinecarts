@@ -51,7 +51,7 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
 
             float f = entity.getHeight() + 0.5f;
 
-            float yOffset = 20 - (infoTexts.size() * 10);
+            float yOffset = 10 - (infoTexts.size() * 10);
             for (Text infoText : infoTexts) {
                 matrices.push();
                 matrices.translate(0.0, f, 0.0);
