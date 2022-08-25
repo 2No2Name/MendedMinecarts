@@ -128,14 +128,14 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
                 // values have a 1 implicit bit.
                 answer.append(subnormal ? "0." : "1.");
 
-                // Isolate the low-order 13 digits of the hex
+                // Isolate the low-order 49 digits of the binary
                 // representation.  If all the digits are zero,
                 // replace with a single 0; otherwise, remove all
                 // trailing zeros.
-                String signif = Long.toBinaryString(signifBits).substring(12, 64);
-                answer.append(signif.equals("0000000000000000000000000000000000000000000000000000") ? // 52 zeros
+                String signif = Long.toBinaryString(signifBits).substring(12, 61);
+                answer.append(signif.equals("0000000000000000000000000000000000000000000000000") ? // 49 zeros
                         "0" :
-                        signif.replaceFirst("0{1,52}$", ""));
+                        signif.replaceFirst("0{1,48}$", ""));
 
                 answer.append('p');
                 // If the value is subnormal, use the E_min exponent
