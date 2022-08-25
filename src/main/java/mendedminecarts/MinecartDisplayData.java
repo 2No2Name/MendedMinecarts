@@ -108,7 +108,7 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
             if (Math.copySign(1.0, d) == -1.0)    // value is negative,
                 answer.append("-");                  // so append sign info
 
-            answer.append("0x");
+            answer.append("0b");
 
             d = Math.abs(d);
 
