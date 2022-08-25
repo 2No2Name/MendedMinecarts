@@ -74,19 +74,12 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         return Text.translatable("mendedminecarts.pos").append(": ").append(formatVec3d(this.pos()));
     }
 
-    public Text getBinaryDisplayPosText() {
-        if (this.pos() == null) {
-            return Text.translatable("mendedminecarts.pos").append(": ").append(Text.translatable("mendedminecarts.unknown"));
-        }
-        return Text.translatable("mendedminecarts.pos").append(": ").append(formatVec3dBinary(this.pos()));
+    public Text getBinaryDisplayPosText(String axis, double pos) {
+        return Text.literal(axis).append(": ").append(doubleToBinaryString(pos));
     }
 
     public static String formatVec3d(Vec3d vec) {
         return "(" + String.format(getDoubleFormatString(), vec.x) + ", " + String.format(getDoubleFormatString(), vec.y) + ", " + String.format(getDoubleFormatString(), vec.z) + ")";
-    }
-
-    public static String formatVec3dBinary(Vec3d vec) {
-        return "(" + doubleToBinaryString(vec.x) + ", " + doubleToBinaryString(vec.y) + ", " + doubleToBinaryString(vec.z) + ")";
     }
 
     /**
@@ -266,7 +259,9 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
             infoTexts.add(Text.translatable("mendedminecarts.hopper_locked").append(": ").append(String.valueOf(this.hopperLocked())));
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_POS_BINARY.isEnabled() && this.pos() != null) {
-            infoTexts.add(this.getBinaryDisplayPosText());
+            infoTexts.add(this.getBinaryDisplayPosText("X", this.pos.x));
+            infoTexts.add(this.getBinaryDisplayPosText("Y", this.pos.y));
+            infoTexts.add(this.getBinaryDisplayPosText("Z", this.pos.z));
         }
 
 
