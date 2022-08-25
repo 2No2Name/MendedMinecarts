@@ -20,6 +20,8 @@ import net.minecraft.util.shape.VoxelShape;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import static java.lang.Double.isFinite;
+
 /**
  * Stores last received server side minecart data
  */
@@ -72,8 +74,80 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         return Text.translatable("mendedminecarts.pos").append(": ").append(formatVec3d(this.pos()));
     }
 
+    public Text getBinaryDisplayPosText() {
+        if (this.pos() == null) {
+            return Text.translatable("mendedminecarts.pos").append(": ").append(Text.translatable("mendedminecarts.unknown"));
+        }
+        return Text.translatable("mendedminecarts.pos").append(": ").append(formatVec3dBinary(this.pos()));
+    }
+
     public static String formatVec3d(Vec3d vec) {
         return "(" + String.format(getDoubleFormatString(), vec.x) + ", " + String.format(getDoubleFormatString(), vec.y) + ", " + String.format(getDoubleFormatString(), vec.z) + ")";
+    }
+
+    public static String formatVec3dBinary(Vec3d vec) {
+        return "(" + doubleToBinaryString(vec.x) + ", " + doubleToBinaryString(vec.y) + ", " + doubleToBinaryString(vec.z) + ")";
+    }
+
+    /**
+     * Takem from Double.toHexString, but adapted for binary output
+     */
+    public static String doubleToBinaryString(double d) {
+        /*
+         * Modeled after the "a" conversion specifier in C99, section
+         * 7.19.6.1; however, the output of this method is more
+         * tightly specified.
+         */
+        if (!isFinite(d))
+            // For infinity and NaN, use the decimal output.
+            return Double.toString(d);
+        else {
+            // Initialized to maximum size of output.
+            StringBuilder answer = new StringBuilder(24);
+
+            if (Math.copySign(1.0, d) == -1.0)    // value is negative,
+                answer.append("-");                  // so append sign info
+
+            answer.append("0x");
+
+            d = Math.abs(d);
+
+            if (d == 0.0) {
+                answer.append("0.0p0");
+            } else {
+                boolean subnormal = (d < Double.MIN_NORMAL);
+
+                // Isolate significand bits and OR in a high-order bit
+                // so that the string representation has a known
+                // length.
+                long signifBits = (Double.doubleToLongBits(d)
+                        & 0x000FFFFFFFFFFFFFL) |
+                        0x1000000000000000L;
+
+                // Subnormal values have a 0 implicit bit; normal
+                // values have a 1 implicit bit.
+                answer.append(subnormal ? "0." : "1.");
+
+                // Isolate the low-order 13 digits of the hex
+                // representation.  If all the digits are zero,
+                // replace with a single 0; otherwise, remove all
+                // trailing zeros.
+                String signif = Long.toBinaryString(signifBits).substring(12, 64);
+                answer.append(signif.equals("0000000000000000000000000000000000000000000000000000") ? // 52 zeros
+                        "0" :
+                        signif.replaceFirst("0{1,52}$", ""));
+
+                answer.append('p');
+                // If the value is subnormal, use the E_min exponent
+                // value for double; otherwise, extract and report d's
+                // exponent (the representation of a subnormal uses
+                // E_min -1).
+                answer.append(subnormal ?
+                        Double.MIN_EXPONENT :
+                        Math.getExponent(d));
+            }
+            return answer.toString();
+        }
     }
 
     public Text getDisplayVelocityText() {
@@ -190,6 +264,9 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_CART_LOCKED.isEnabled() && this.entity() instanceof HopperMinecartEntity) {
             infoTexts.add(Text.translatable("mendedminecarts.hopper_locked").append(": ").append(String.valueOf(this.hopperLocked())));
+        }
+        if (MendedMinecartsMod.DISPLAY_CART_DATA_POS_BINARY.isEnabled() && this.pos() != null) {
+            infoTexts.add(this.getBinaryDisplayPosText());
         }
 
 

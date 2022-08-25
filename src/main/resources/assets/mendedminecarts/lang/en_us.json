@@ -17,6 +17,7 @@
   "mendedminecarts.fill_level": "Signal Strength",
   "mendedminecarts.in_water": "In water",
   "mendedminecarts.display_cart_data.position.description": "Displays the coordinates above minecarts.",
+  "mendedminecarts.display_cart_data.binary_position.description": "Displays the coordinates above minecarts in binary.",
   "mendedminecarts.display_cart_data.velocity.description": "Displays the velocity vector above minecarts.",
   "mendedminecarts.display_cart_data.speed.description": "Displays the absolute velocity above minecarts.",
   "mendedminecarts.display_cart_data.fill_level.description": "Displays the fill level of storage minecarts above them.",

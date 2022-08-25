@@ -20,9 +20,8 @@ public class MendedMinecartsMod implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("mendedminecarts");
-	//TODO USE MENDEDMINECARTS as name with bandaid logo
 
-	public static final int SETTING_VERSION = 7;
+	public static final int SETTING_VERSION = 8;
 	public static final String SETTING_COMMAND = "mendedminecarts";
 	public static final double DATA_RENDER_DISTANCE_SQ = 25d * 25d;
 
@@ -42,6 +41,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	}
 
 	public static final BooleanSetting DISPLAY_CART_DATA_POS = new BooleanSetting("Position", false, Text.translatable("mendedminecarts.display_cart_data.position.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_POS_BINARY = new BooleanSetting("BinaryPosition", false, Text.translatable("mendedminecarts.display_cart_data.binary_position.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_VELOCITY = new BooleanSetting("Velocity", false, Text.translatable("mendedminecarts.display_cart_data.velocity.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_SPEED = new BooleanSetting("Speed", false, Text.translatable("mendedminecarts.display_cart_data.speed.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_FILL_LEVEL = new BooleanSetting("FillLevel", false, Text.translatable("mendedminecarts.display_cart_data.fill_level.description"));
@@ -75,7 +75,8 @@ public class MendedMinecartsMod implements ModInitializer {
 							DISPLAY_CART_DATA_HOPPER_EXTRACT_VOLUME,
 							DISPLAY_CART_DATA_HOPPER_EXTRACT_BLOCK,
 							DISPLAY_CART_DATA_WOBBLE,
-							DISPLAY_CART_DATA_PRECISION
+							DISPLAY_CART_DATA_PRECISION,
+							DISPLAY_CART_DATA_POS_BINARY
 					)
 	);
 
