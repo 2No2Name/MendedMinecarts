@@ -39,5 +39,6 @@
   "mendedminecarts.unknown": "unknown",
   "mendedminecarts.data_precision.description": "Number of digits when displaying floating point values.",
   "mendedminecarts.hopper_locked": "Locked",
-  "mendedminecarts.wobble": "Wobble"
+  "mendedminecarts.wobble": "Wobble",
+  "mendedminecarts.no_cart_item_cap.description": "Remove the item cap of minecart inventories and item stacks. Adds a \"CustomCount\" integer attribute to the NBT of ItemStacks."
 }

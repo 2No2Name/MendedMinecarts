@@ -88,6 +88,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	//	public static BooleanSetting DERAILING_CART_FIX_DEMO = new BooleanSetting("DerailingCartFixDemo", false, Text.translatable("mendedminecarts.derailing_cart_fix_demo.description")));
 	public static final BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, Text.translatable("mendedminecarts.rotate_cart_to_rail.description")));
 	public static final BooleanSetting EXPLODING_CART_FIX = addSetting(new BooleanSetting("ExplodeRailsFix", false, Text.translatable("mendedminecarts.explode_rail_fix.description")));
+	public static final BooleanSetting NO_CART_ITEM_CAP = addSetting(new BooleanSetting("NoCartItemCap", false, Text.translatable("mendedminecarts.no_cart_item_cap.description")));
 
 	@Override
 	public void onInitialize() {

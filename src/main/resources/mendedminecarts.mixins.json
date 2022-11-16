@@ -14,7 +14,9 @@
     "DataQueryHandlerMixin",
     "EntityShapeContextAccessor",
     "EntityTrackerEntryMixin",
+    "ItemStackMixin_ItemCap",
     "MinecartEntityRendererMixin",
+    "StorageMinecartEntityMixin_ItemCap",
     "TntMinecartEntityMixin",
     "settings.ClientPlayNetworkHandlerMixin",
     "settings.PlayerManagerMixin"
