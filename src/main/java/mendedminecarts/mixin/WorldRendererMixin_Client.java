@@ -10,6 +10,7 @@ import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import org.spongepowered.asm.mixin.Final;
@@ -36,7 +37,8 @@ public abstract class WorldRendererMixin_Client {
                         MendedMinecartsMod.DISPLAY_CART_DATA_BOX.isEnabled() ||
                                 MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_PICKUP_VOLUME.isEnabled() ||
                                 MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_EXTRACT_VOLUME.isEnabled() ||
-                                MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_EXTRACT_BLOCK.isEnabled()
+                                MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_EXTRACT_BLOCK.isEnabled() ||
+                                MendedMinecartsMod.DISPLAY_CART_DATA_ENTITY_PICKUP_VOLUME.isEnabled()
                 ) && entity instanceof AbstractMinecartEntityAccess entityAccess) {
             if (this.entityRenderDispatcher.getSquaredDistanceToCamera(entity) > MendedMinecartsMod.DATA_RENDER_DISTANCE_SQ) {
                 return;
@@ -51,6 +53,12 @@ public abstract class WorldRendererMixin_Client {
                     Box box = displayInfo.boundingBox();
                     if (box != null) {
                         WorldRenderer.drawBox(matrices, buffer, box, 0.5f, 0.5f, 1.0f, 1.0f);
+                    }
+                }
+                if (MendedMinecartsMod.DISPLAY_CART_DATA_ENTITY_PICKUP_VOLUME.isEnabled() && entity.getType() == EntityType.MINECART) {
+                    Box box = displayInfo.boundingBox().expand(0.2f, 0.0, 0.2f);
+                    if (box != null) {
+                        WorldRenderer.drawBox(matrices, buffer, box, 0.7f, 0.3f, 0.3f, 1.0f);
                     }
                 }
                 if (MendedMinecartsMod.DISPLAY_CART_DATA_HOPPER_PICKUP_VOLUME.isEnabled()) {

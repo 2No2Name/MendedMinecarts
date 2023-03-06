@@ -50,11 +50,13 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting DISPLAY_CART_DATA_SLOWDOWN_RATE = new BooleanSetting("SlowdownRate", false, Text.translatable("mendedminecarts.display_cart_data.slowdown_rate.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_ESTIMATED_DISTANCE = new BooleanSetting("EstimatedDistance", false, Text.translatable("mendedminecarts.display_cart_data.estimated_distance.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_BOX = new BooleanSetting("BoundingBox", false, Text.translatable("mendedminecarts.display_cart_data.bounding_box.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_ENTITY_PICKUP_VOLUME = new BooleanSetting("EntityPickupVolume", false, Text.translatable("mendedminecarts.display_cart_data.entity_pickup_box.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_HOPPER_PICKUP_VOLUME = new BooleanSetting("HopperPickupVolume", false, Text.translatable("mendedminecarts.display_cart_data.hopper_pickup_box.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_HOPPER_EXTRACT_VOLUME = new BooleanSetting("HopperExtractVolume", false, Text.translatable("mendedminecarts.display_cart_data.hopper_extract_volume.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_HOPPER_EXTRACT_BLOCK = new BooleanSetting("HopperExtractBlock", false, Text.translatable("mendedminecarts.display_cart_data.hopper_extract_block.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_HOPPER_CART_LOCKED = new BooleanSetting("HopperLocked", false, Text.translatable("mendedminecarts.display_cart_data.hopper_locked.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_WOBBLE = new BooleanSetting("Wobble", false, Text.translatable("mendedminecarts.display_cart_data.wobble.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_RIDEABLE = new BooleanSetting("Rideable", false, Text.translatable("mendedminecarts.display_cart_data.is_rideable.description"));
 	public static final IntegerSetting DISPLAY_CART_DATA_PRECISION = new IntegerSetting("DataPrecision", 4, Text.translatable("mendedminecarts.data_precision.description"));
 
 
@@ -70,11 +72,13 @@ public class MendedMinecartsMod implements ModInitializer {
 							DISPLAY_CART_DATA_IN_WATER,
 							DISPLAY_CART_DATA_SLOWDOWN_RATE,
 							DISPLAY_CART_DATA_ESTIMATED_DISTANCE,
+							DISPLAY_CART_DATA_ENTITY_PICKUP_VOLUME,
 							DISPLAY_CART_DATA_HOPPER_CART_LOCKED,
 							DISPLAY_CART_DATA_HOPPER_PICKUP_VOLUME,
 							DISPLAY_CART_DATA_HOPPER_EXTRACT_VOLUME,
 							DISPLAY_CART_DATA_HOPPER_EXTRACT_BLOCK,
 							DISPLAY_CART_DATA_WOBBLE,
+							DISPLAY_CART_DATA_RIDEABLE,
 							DISPLAY_CART_DATA_PRECISION,
 							DISPLAY_CART_DATA_POS_BINARY
 					)

@@ -1,6 +1,7 @@
 package mendedminecarts;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.FurnaceMinecartEntity;
 import net.minecraft.entity.vehicle.HopperMinecartEntity;
@@ -26,7 +27,7 @@ import static java.lang.Double.isFinite;
  * Stores last received server side minecart data
  */
 public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, boolean onGround, int fillLevel,
-                                  double slowdownFactor, double estimatedDistance, boolean hopperLocked, float wobble,
+                                  double slowdownFactor, double estimatedDistance, boolean hopperLocked, float wobble, boolean rideable,
                                   AbstractMinecartEntity entity) {
 
     public static MinecartDisplayData fromNBT(AbstractMinecartEntityAccess entity, NbtCompound nbt) {
@@ -48,9 +49,9 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         double slowdown = getSlowdown((Entity) entity, nbt, fillLevel);
         double estimatedDistance = estimateDistance(velocity.length(), (AbstractMinecartEntity) entity, slowdown);
 
-
+        boolean rideable = ((AbstractMinecartEntity) entity).getType() == EntityType.MINECART && !((AbstractMinecartEntity) entity).hasPassengers();
         Box boxAt = ((Entity) entity).getType().getDimensions().getBoxAt(pos.x, pos.y, pos.z);
-        return new MinecartDisplayData(pos, boxAt, velocity, onGround, fillLevel, slowdown, estimatedDistance, hopperLocked, wobble, (AbstractMinecartEntity) entity);
+        return new MinecartDisplayData(pos, boxAt, velocity, onGround, fillLevel, slowdown, estimatedDistance, hopperLocked, wobble, rideable, (AbstractMinecartEntity) entity);
     }
 
     private static int getComparatorOutput(StorageMinecartEntity inventory, NbtCompound nbtCompound) {
@@ -265,6 +266,9 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
             infoTexts.add(this.getBinaryDisplayPosText("X", this.pos.x));
             infoTexts.add(this.getBinaryDisplayPosText("Y", this.pos.y));
             infoTexts.add(this.getBinaryDisplayPosText("Z", this.pos.z));
+        }
+        if (MendedMinecartsMod.DISPLAY_CART_DATA_RIDEABLE.isEnabled() && this.entity().getType() == EntityType.MINECART) {
+            infoTexts.add(Text.translatable("mendedminecarts.is_rideable").append(": ").append(String.valueOf(this.rideable())));
         }
 
 

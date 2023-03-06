@@ -26,6 +26,8 @@
   "mendedminecarts.display_cart_data.slowdown_rate.description": "Displays the slowdown rate of minecarts. Requires accurate client minecarts.",
   "mendedminecarts.display_cart_data.estimated_distance.description": "Displays an estimate of the distance the minecart can travel with the current velocity and slowdown rate",
   "mendedminecarts.display_cart_data.bounding_box.description": "Displays the minecart bounding box.",
+  "mendedminecarts.display_cart_data.is_rideable.description": "Displays whether a passenger can enter the minecart.",
+  "mendedminecarts.display_cart_data.entity_pickup_box.description": "Displays the entity pickup / push away volume of rideable minecarts.",
   "mendedminecarts.display_cart_data.hopper_locked.description": "Displays whether hopper carts are locked.",
   "mendedminecarts.display_cart_data.hopper_pickup_box.description": "Displays the item pickup volume of hopper minecarts.",
   "mendedminecarts.display_cart_data.hopper_extract_volume.description": "Displays the inventory entity search volume of hopper minecarts.",
@@ -40,5 +42,6 @@
   "mendedminecarts.data_precision.description": "Number of digits when displaying floating point values.",
   "mendedminecarts.hopper_locked": "Locked",
   "mendedminecarts.wobble": "Wobble",
+  "mendedminecarts.is_rideable": "Rideable",
   "mendedminecarts.no_cart_item_cap.description": "Remove the item cap of minecart inventories and item stacks. Adds a \"CustomCount\" integer attribute to the NBT of ItemStacks."
 }
