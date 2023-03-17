@@ -18,6 +18,7 @@
     "MinecartEntityRendererMixin",
     "StorageMinecartEntityMixin_ItemCap",
     "TntMinecartEntityMixin",
+    "boat.BoatEntityMixin",
     "settings.ClientPlayNetworkHandlerMixin",
     "settings.PlayerManagerMixin"
   ],

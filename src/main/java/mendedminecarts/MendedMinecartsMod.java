@@ -21,7 +21,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("mendedminecarts");
 
-	public static final int SETTING_VERSION = 8;
+	public static final int SETTING_VERSION = 9;
 	public static final String SETTING_COMMAND = "mendedminecarts";
 	public static final double DATA_RENDER_DISTANCE_SQ = 25d * 25d;
 
@@ -84,6 +84,7 @@ public class MendedMinecartsMod implements ModInitializer {
 					)
 	);
 
+	public static final BooleanSetting ACCURATE_CLIENT_BOATS = addSetting(new BooleanSetting("AccurateClientBoats", false, Text.translatable("mendedminecarts.accurate_client_boats.description")));
 	public static final BooleanSetting ACCURATE_CLIENT_MINECARTS = addSetting(new BooleanSetting("AccurateClientMinecarts", false, Text.translatable("mendedminecarts.accurate_client_minecarts.description")));
 	public static final BooleanSetting NO_CLIENT_CART_INTERPOLATION = addSetting(new BooleanSetting("NoClientCartInterpolation", false, Text.translatable("mendedminecarts.no_cart_interpolation.description")));
 	public static final BooleanSetting ALWAYS_SYNC_CART_POSITION = addSetting(new BooleanSetting("AlwaysSyncCartPosition", false, Text.translatable("mendedminecarts.always_sync_cart_position.description")));

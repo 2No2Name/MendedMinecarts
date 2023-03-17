@@ -2,6 +2,7 @@
   "mendedminecarts.available_settings": "Available Settings:",
   "mendedminecarts.default_setting": "default:",
   "mendedminecarts.accurate_client_minecarts.description": "Runs the same minecart movement code on the client as on the server. Currently only in singleplayer worlds.",
+  "mendedminecarts.accurate_client_boats.description": "Please consider using minecarts instead of boats.",
   "mendedminecarts.no_cart_interpolation.description": "Disables the client interpolation capability. Instead position packets set the client side cart position like with other entities.",
   "mendedminecarts.always_sync_cart_position.description": "Server sends the minecart position to the client every tick.",
   "mendedminecarts.derailing_cart_fix.description": "Carts do not derail anymore.",
