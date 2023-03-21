@@ -41,7 +41,7 @@ public abstract class TntMinecartEntityMixin extends Entity {
             method = "damage",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/entity/vehicle/TntMinecartEntity;explode(D)V",
+                    target = "Lnet/minecraft/entity/vehicle/TntMinecartEntity;explode(Lnet/minecraft/entity/damage/DamageSource;D)V",
                     shift = At.Shift.BEFORE
             )
     )
