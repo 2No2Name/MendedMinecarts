@@ -294,7 +294,7 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         if (!(this.entity() instanceof HopperMinecartEntity)) {
             return null;
         }
-        return new BlockPos(this.pos.x, this.pos.y + 0.5 + 1.0, this.pos.z);
+        return BlockPos.ofFloored(this.pos.x, this.pos.y + 0.5 + 1.0, this.pos.z);
     }
 
     public Box hopperExtractBox() {

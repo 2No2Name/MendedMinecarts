@@ -4,6 +4,7 @@ import mendedminecarts.AbstractMinecartEntityAccess;
 import mendedminecarts.MendedMinecartsMod;
 import mendedminecarts.MinecartDisplayData;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.font.TextRenderer.TextLayerType;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -11,11 +12,11 @@ import net.minecraft.client.render.entity.MinecartEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.joml.Matrix4f;
 
 import java.util.ArrayList;
 
@@ -59,7 +60,7 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
                 matrices.scale(-0.025f, -0.025f, 0.025f);
                 Matrix4f matrix4f = matrices.peek().getPositionMatrix();
                 float h = -textRenderer.getWidth(infoText) / 2f;
-                textRenderer.draw(infoText, h, yOffset, -1, false, matrix4f, vertexConsumerProvider, true, 0, light);
+                textRenderer.draw(infoText, h, yOffset, -1, false, matrix4f, vertexConsumerProvider, TextLayerType.SEE_THROUGH, 0, light);
 
                 matrices.pop();
 
