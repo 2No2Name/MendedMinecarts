@@ -3,6 +3,7 @@ package mendedminecarts.mixin;
 import mendedminecarts.AbstractMinecartEntityAccess;
 import mendedminecarts.MendedMinecartsMod;
 import mendedminecarts.MinecartDisplayData;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.font.TextRenderer.TextLayerType;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -29,7 +30,7 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
 
     @Inject(
             method = "render(Lnet/minecraft/entity/vehicle/AbstractMinecartEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
-            at = @At("RETURN")
+            at = @At("HEAD")
     )
     private void renderInfo(T entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumerProvider, int light, CallbackInfo ci) {
         if (MendedMinecartsMod.DISPLAY_CART_DATA.isEnabled() && entity instanceof AbstractMinecartEntityAccess entityAccess) {
@@ -53,6 +54,9 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
             float f = entity.getHeight() + 0.5f;
 
             float yOffset = 10 - (infoTexts.size() * 10);
+
+            float backgroundOpacity = MinecraftClient.getInstance().options.getTextBackgroundOpacity(0.25f);
+            int backgroundColor = (int)(backgroundOpacity * 255.0f) << 24;
             for (Text infoText : infoTexts) {
                 matrices.push();
                 matrices.translate(0.0, f, 0.0);
@@ -60,6 +64,7 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
                 matrices.scale(-0.025f, -0.025f, 0.025f);
                 Matrix4f matrix4f = matrices.peek().getPositionMatrix();
                 float h = -textRenderer.getWidth(infoText) / 2f;
+
                 textRenderer.draw(infoText, h, yOffset, -1, false, matrix4f, vertexConsumerProvider, TextLayerType.SEE_THROUGH, 0, light);
 
                 matrices.pop();

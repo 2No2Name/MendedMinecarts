@@ -15,6 +15,7 @@
     "EntityShapeContextAccessor",
     "EntityTrackerEntryMixin",
     "ItemStackMixin_ItemCap",
+    "LavaCauldronBlockMixin_TNTCartDamage",
     "MinecartEntityRendererMixin",
     "StorageMinecartEntityMixin_ItemCap",
     "TntMinecartEntityMixin",
