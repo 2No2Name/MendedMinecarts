@@ -57,13 +57,13 @@ public class DoubleSetting implements Setting {
     @Override
     public LiteralArgumentBuilder<ServerCommandSource> buildCommand() {
         return CommandManager.literal(this.name).executes(commandContext -> {
-            commandContext.getSource().sendFeedback(this.asText(), false);
-            commandContext.getSource().sendFeedback(this.getDefault(), false);
+            commandContext.getSource().sendFeedback(this::asText, false);
+            commandContext.getSource().sendFeedback(this::getDefault, false);
             return 1;
         }).then(CommandManager.argument("state", DoubleArgumentType.doubleArg(this.minValue, this.maxValue)).executes((context) -> {
             this.setDouble(context.getArgument("state", Double.class));
             this.onChangedByCommand();
-            context.getSource().sendFeedback(this.asText(), false);
+            context.getSource().sendFeedback(this::asText, false);
             return 1;
         }));
     }

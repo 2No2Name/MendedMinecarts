@@ -51,7 +51,7 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 			cancellable = true
 	)
 	private void setCartPosLikeOtherEntities(double x, double y, double z, float yaw, float pitch, int interpolationSteps, boolean interpolate, CallbackInfo ci) {
-		if (this.world.isClient && (MendedMinecartsMod.ACCURATE_CLIENT_MINECARTS.isEnabled() || MendedMinecartsMod.NO_CLIENT_CART_INTERPOLATION.isEnabled())) {
+		if (this.getWorld().isClient && (MendedMinecartsMod.ACCURATE_CLIENT_MINECARTS.isEnabled() || MendedMinecartsMod.NO_CLIENT_CART_INTERPOLATION.isEnabled())) {
 			ci.cancel();
 			super.updateTrackedPositionAndAngles(x, y, z, yaw, pitch, interpolationSteps, interpolate);
 		}
@@ -63,7 +63,7 @@ public abstract class AbstractMinecartEntityMixin_Client extends Entity implemen
 			at = @At("HEAD")
 	)
 	private void updateDisplayInfo(CallbackInfo ci) {
-		if (!this.world.isClient()) {
+		if (!this.getWorld().isClient()) {
 			return;
 		}
 		if (MendedMinecartsMod.DISPLAY_CART_DATA.isEnabled() &&

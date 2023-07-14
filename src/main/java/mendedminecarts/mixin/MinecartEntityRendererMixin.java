@@ -13,6 +13,7 @@ import net.minecraft.client.render.entity.MinecartEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.text.Text;
+import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -65,7 +66,8 @@ public abstract class MinecartEntityRendererMixin<T extends AbstractMinecartEnti
                 Matrix4f matrix4f = matrices.peek().getPositionMatrix();
                 float h = -textRenderer.getWidth(infoText) / 2f;
 
-                textRenderer.draw(infoText, h, yOffset, -1, false, matrix4f, vertexConsumerProvider, TextLayerType.SEE_THROUGH, 0, light);
+                textRenderer.draw(infoText, h, yOffset, 0x20FFFFFF, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.SEE_THROUGH, backgroundColor, light);
+                textRenderer.draw(infoText, h, yOffset, -1, false, matrix4f, vertexConsumerProvider, TextRenderer.TextLayerType.NORMAL, 0, light);
 
                 matrices.pop();
 

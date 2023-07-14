@@ -40,7 +40,7 @@ public abstract class AbstractMinecartEntityMixin_YawFix extends Entity {
     }
 
     private boolean fixRotationToRail(float yaw, float pitch) {
-        BlockState blockState = this.world.getBlockState(this.getBlockPos());
+        BlockState blockState = this.getWorld().getBlockState(this.getBlockPos());
         if (blockState.getBlock() instanceof AbstractRailBlock railBlock) {
             RailShape railShape = blockState.get(railBlock.getShapeProperty());
             Direction.Axis railAxis = RailHitboxHelper.getRailAxis(railShape);

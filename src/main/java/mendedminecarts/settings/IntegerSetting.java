@@ -53,14 +53,14 @@ public class IntegerSetting implements Setting {
     @Override
     public LiteralArgumentBuilder<ServerCommandSource> buildCommand() {
         return CommandManager.literal(this.name).executes(commandContext -> {
-            commandContext.getSource().sendFeedback(this.asText(), false);
-            commandContext.getSource().sendFeedback(this.getDefault(), false);
+            commandContext.getSource().sendFeedback(() -> this.asText(), false);
+            commandContext.getSource().sendFeedback(() -> this.getDefault(), false);
             return 1;
         }).
                 then(CommandManager.argument("enabled", IntegerArgumentType.integer()).executes((context) -> {
                     this.setEnabled(context.getArgument("enabled", Integer.class));
                     Setting.super.onChangedByCommand();
-                    context.getSource().sendFeedback(this.asText(), false);
+                    context.getSource().sendFeedback(this::asText, false);
                     return 1;
                 }));
     }

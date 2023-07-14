@@ -53,7 +53,7 @@ public class SettingGroup extends BooleanSetting {
     @Override
     public LiteralArgumentBuilder<ServerCommandSource> buildCommand() {
         LiteralArgumentBuilder<ServerCommandSource> builder = CommandManager.literal(this.name).executes(commandContext -> {
-            commandContext.getSource().sendFeedback(this.asText(), false);
+            commandContext.getSource().sendFeedback(this::asText, false);
             listChildren(commandContext.getSource(), this.children);
             return 1;
         });
@@ -65,13 +65,13 @@ public class SettingGroup extends BooleanSetting {
     }
 
     private static void listChildren(ServerCommandSource source, Setting[] children) {
-        source.sendFeedback(Text.translatable("mendedminecarts.available_settings"), false);
-        source.sendFeedback(Text.translatable(""), false);
+        source.sendFeedback(() -> Text.translatable("mendedminecarts.available_settings"), false);
+        source.sendFeedback(() -> Text.translatable(""), false);
         for (Setting setting : children) {
-            source.sendFeedback(setting.asText(), false);
-            source.sendFeedback(setting.getDefault(), false);
-            source.sendFeedback(setting.getDescription(), false);
-            source.sendFeedback(Text.literal(""), false);
+            source.sendFeedback(setting::asText, false);
+            source.sendFeedback(setting::getDefault, false);
+            source.sendFeedback(setting::getDescription, false);
+            source.sendFeedback(() -> Text.literal(""), false);
         }
     }
 

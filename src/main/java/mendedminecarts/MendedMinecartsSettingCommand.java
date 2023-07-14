@@ -27,13 +27,13 @@ public class MendedMinecartsSettingCommand {
 
 
     private static int listSettings(ServerCommandSource source) {
-        source.sendFeedback(Text.translatable("mendedminecarts.available_settings"), false);
-        source.sendFeedback(Text.translatable(""), false);
+        source.sendFeedback(() -> Text.translatable("mendedminecarts.available_settings"), false);
+        source.sendFeedback(() -> Text.translatable(""), false);
         for (Setting setting : MendedMinecartsMod.SETTINGS) {
-            source.sendFeedback(setting.asText(), false);
-            source.sendFeedback(setting.getDefault(), false);
-            source.sendFeedback(setting.getDescription(), false);
-            source.sendFeedback(Text.literal(""), false);
+            source.sendFeedback(setting::asText, false);
+            source.sendFeedback(setting::getDefault, false);
+            source.sendFeedback(setting::getDescription, false);
+            source.sendFeedback(() -> Text.literal(""), false);
         }
         return 1;
     }
