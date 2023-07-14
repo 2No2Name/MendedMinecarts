@@ -39,7 +39,7 @@ public class LavaCauldronBlockMixin_TNTCartDamage {
             return;
         }
         tntCart.setOnFireFor(15);
-        if (tntCart.damage(DamageSource.LAVA, 4.0f)) {
+        if (tntCart.damage(tntCart.getDamageSources().cactus(), 4.0f)) {
             tntCart.playSound(SoundEvents.ENTITY_GENERIC_BURN, 0.4f, 2.0f + tntCart.getWorld().random.nextFloat() * 0.4f);
         }
     }
