@@ -45,5 +45,6 @@
   "mendedminecarts.wobble": "Wobble",
   "mendedminecarts.is_rideable": "Rideable",
   "mendedminecarts.no_cart_item_cap.description": "Remove the item cap of minecart inventories and item stacks. Adds a \"CustomCount\" integer attribute to the NBT of ItemStacks.",
-  "mendedminecarts.lava_cauldron_kills_tnt_carts": "Lava cauldrons don't make TNT carts explode."
+  "mendedminecarts.lava_cauldron_kills_tnt_carts": "Lava cauldrons don't make TNT carts explode.",
+  "mendedminecarts.rail_placement": "Better rail placement when player is sneaking. Sloped rails like top slabs, curved rails when clicking in the corner of a block."
 }
