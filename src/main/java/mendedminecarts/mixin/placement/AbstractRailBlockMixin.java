@@ -19,11 +19,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import static mendedminecarts.RailPlacementHelper.NO_CONNECT_POS;
 
 @Mixin(AbstractRailBlock.class)
 public abstract class AbstractRailBlockMixin extends Block implements Waterloggable {
-
     @Shadow @Final public static BooleanProperty WATERLOGGED;
 
     @Shadow @Final private boolean forbidCurves;
@@ -55,6 +57,8 @@ public abstract class AbstractRailBlockMixin extends Block implements Waterlogga
             boolean shouldCurve = (clickSide == Direction.UP || clickSide == Direction.DOWN);
 
             boolean isEastWest = railDirection == Direction.EAST || railDirection == Direction.WEST;
+
+            boolean modified = false;
             RailShape railShape = isEastWest ? RailShape.EAST_WEST : RailShape.NORTH_SOUTH;
             if (shouldAscend) {
                 if (railDirection == Direction.DOWN || railDirection == Direction.UP) {
@@ -75,6 +79,7 @@ public abstract class AbstractRailBlockMixin extends Block implements Waterlogga
                     }
                     if (railShape1 != null && !shouldDropRail(blockPos, ctx.getWorld(), railShape1)) {
                         railShape = railShape1;
+                        modified = true;
                     }
                 }
             } else if (shouldCurve && !this.forbidCurves) {
@@ -85,16 +90,37 @@ public abstract class AbstractRailBlockMixin extends Block implements Waterlogga
                 //SOUTH AND EAST are positive. SOUTH is Z axis, EAST is X
                 if (positiveX && positiveZ) {
                     railShape = RailShape.SOUTH_EAST;
+                    modified = true;
                 } else if (positiveX && negativeZ) {
                     railShape = RailShape.NORTH_EAST;
+                    modified = true;
                 } else if (negativeX && positiveZ) {
                     railShape = RailShape.SOUTH_WEST;
+                    modified = true;
                 } else if (negativeX && negativeZ) {
                     railShape = RailShape.NORTH_WEST;
+                    modified = true;
                 }
             }
-            retBlockState = retBlockState.with(this.getShapeProperty(), railShape);
-            cir.setReturnValue(retBlockState);
+            if (modified) {
+                retBlockState = retBlockState.with(this.getShapeProperty(), railShape);
+                cir.setReturnValue(retBlockState);
+            }
+            NO_CONNECT_POS.set(blockPos);
+        }
+    }
+
+    @Inject(
+            method = "onBlockAdded", at = @At("HEAD"), cancellable = true
+    )
+    private void cancelUpdates(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify, CallbackInfo ci) {
+        BlockPos noUpdatePos = NO_CONNECT_POS.get();
+        if (pos.equals(noUpdatePos)) {
+            ci.cancel();
+        }
+
+        if (noUpdatePos != null) {
+            NO_CONNECT_POS.set(null);
         }
     }
 }

@@ -21,6 +21,7 @@
     "TntMinecartEntityMixin",
     "boat.BoatEntityMixin",
     "placement.AbstractRailBlockMixin",
+    "placement.DetectorRailBlockMixin",
     "settings.ClientPlayNetworkHandlerMixin",
     "settings.PlayerManagerMixin"
   ],
