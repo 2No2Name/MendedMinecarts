@@ -1,5 +1,6 @@
 package mendedminecarts.mixin.placement;
 
+import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DetectorRailBlock;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +14,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static mendedminecarts.RailPlacementHelper.NO_CONNECT_POS;
 
 @Mixin(DetectorRailBlock.class)
-public abstract class DetectorRailBlockMixin {
+public abstract class DetectorRailBlockMixin extends AbstractRailBlock {
+
+    protected DetectorRailBlockMixin(boolean forbidCurves, Settings settings) {
+        super(forbidCurves, settings);
+    }
 
     @Shadow protected abstract void updatePoweredStatus(World world, BlockPos pos, BlockState state);
 
@@ -24,6 +29,7 @@ public abstract class DetectorRailBlockMixin {
         BlockPos noUpdatePos = NO_CONNECT_POS.get();
         if (pos.equals(noUpdatePos)) {
             ci.cancel();
+            world.updateNeighbor(state, pos, this, pos, notify);
             this.updatePoweredStatus(world, pos, state);
         }
 

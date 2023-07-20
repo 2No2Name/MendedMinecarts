@@ -117,6 +117,9 @@ public abstract class AbstractRailBlockMixin extends Block implements Waterlogga
         BlockPos noUpdatePos = NO_CONNECT_POS.get();
         if (pos.equals(noUpdatePos)) {
             ci.cancel();
+            if (this.forbidCurves) {
+                world.updateNeighbor(state, pos, this, pos, notify);
+            }
         }
 
         if (noUpdatePos != null) {
