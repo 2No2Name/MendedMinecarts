@@ -33,7 +33,7 @@
   "mendedminecarts.display_cart_data.hopper_pickup_box.description": "Displays the item pickup volume of hopper minecarts.",
   "mendedminecarts.display_cart_data.hopper_extract_volume.description": "Displays the inventory entity search volume of hopper minecarts.",
   "mendedminecarts.display_cart_data.hopper_extract_block.description": "Displays the inventory block hopper minecarts interact with.",
-  "mendedminecarts.display_cart_data.wobble.description": "Displays the wobble (health) of carts..",
+  "mendedminecarts.display_cart_data.wobble.description": "Displays the wobble (health) of carts.",
   "mendedminecarts.display_cart_data.description": "Displays server-side information above minecarts.",
   "mendedminecarts.derailing_cart_fix_demo.description": "Prevents minecarts from derailing",
   "mendedminecarts.rotate_cart_to_rail.description": "Rotates minecarts on non-curved rails to fix unexpected pushing behavior of minecarts",
@@ -45,6 +45,8 @@
   "mendedminecarts.wobble": "Wobble",
   "mendedminecarts.is_rideable": "Rideable",
   "mendedminecarts.no_cart_item_cap.description": "Remove the item cap of minecart inventories and item stacks. Adds a \"CustomCount\" integer attribute to the NBT of ItemStacks.",
-  "mendedminecarts.lava_cauldron_kills_tnt_carts": "Lava cauldrons don't make TNT carts explode.",
-  "mendedminecarts.rail_placement": "Better rail placement when player is sneaking. Sloped rails like top slabs, curved rails when clicking in the corner of a block."
+  "mendedminecarts.lava_cauldron_kills_tnt_carts.description": "Lava cauldrons don't make TNT carts explode.",
+  "mendedminecarts.rail_placement.description": "Better rail placement when player is sneaking. Sloped rails like top slabs, curved rails when clicking in the corner of a block.",
+  "mendedminecarts.fuse.description": "Displays the fuse time of TNT minecarts.",
+  "mendedminecarts.fuse": "Fuse"
 }

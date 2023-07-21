@@ -2,13 +2,11 @@ package mendedminecarts;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.vehicle.AbstractMinecartEntity;
-import net.minecraft.entity.vehicle.FurnaceMinecartEntity;
-import net.minecraft.entity.vehicle.HopperMinecartEntity;
-import net.minecraft.entity.vehicle.StorageMinecartEntity;
+import net.minecraft.entity.vehicle.*;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
@@ -27,7 +25,8 @@ import static java.lang.Double.isFinite;
  * Stores last received server side minecart data
  */
 public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, boolean onGround, int fillLevel,
-                                  double slowdownFactor, double estimatedDistance, boolean hopperLocked, float wobble, boolean rideable,
+                                  double slowdownFactor, double estimatedDistance, boolean hopperLocked, float wobble,
+                                  boolean rideable, int fuseTime,
                                   AbstractMinecartEntity entity) {
 
     public static MinecartDisplayData fromNBT(AbstractMinecartEntityAccess entity, NbtCompound nbt) {
@@ -51,7 +50,13 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
 
         boolean rideable = ((AbstractMinecartEntity) entity).getType() == EntityType.MINECART && !((AbstractMinecartEntity) entity).hasPassengers();
         Box boxAt = ((Entity) entity).getType().getDimensions().getBoxAt(pos.x, pos.y, pos.z);
-        return new MinecartDisplayData(pos, boxAt, velocity, onGround, fillLevel, slowdown, estimatedDistance, hopperLocked, wobble, rideable, (AbstractMinecartEntity) entity);
+
+        int fuseTime = Integer.MIN_VALUE;
+        if (nbt.contains("TNTFuse", NbtElement.NUMBER_TYPE)) {
+            fuseTime = nbt.getInt("TNTFuse");
+        }
+
+        return new MinecartDisplayData(pos, boxAt, velocity, onGround, fillLevel, slowdown, estimatedDistance, hopperLocked, wobble, rideable, fuseTime, (AbstractMinecartEntity) entity);
     }
 
     private static int getComparatorOutput(StorageMinecartEntity inventory, NbtCompound nbtCompound) {
@@ -269,6 +274,9 @@ public record MinecartDisplayData(Vec3d pos, Box boundingBox, Vec3d velocity, bo
         }
         if (MendedMinecartsMod.DISPLAY_CART_DATA_RIDEABLE.isEnabled() && this.entity().getType() == EntityType.MINECART) {
             infoTexts.add(Text.translatable("mendedminecarts.is_rideable").append(": ").append(String.valueOf(this.rideable())));
+        }
+        if (MendedMinecartsMod.DISPLAY_CART_DATA_FUSE.isEnabled() && this.entity().getType() == EntityType.TNT_MINECART && this.fuseTime() != Integer.MIN_VALUE) {
+            infoTexts.add(Text.translatable("mendedminecarts.fuse").append(": ").append(String.valueOf(this.fuseTime())));
         }
 
 

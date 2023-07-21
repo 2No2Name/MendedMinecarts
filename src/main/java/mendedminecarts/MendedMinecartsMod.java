@@ -58,6 +58,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting DISPLAY_CART_DATA_WOBBLE = new BooleanSetting("Wobble", false, Text.translatable("mendedminecarts.display_cart_data.wobble.description"));
 	public static final BooleanSetting DISPLAY_CART_DATA_RIDEABLE = new BooleanSetting("Rideable", false, Text.translatable("mendedminecarts.display_cart_data.is_rideable.description"));
 	public static final IntegerSetting DISPLAY_CART_DATA_PRECISION = new IntegerSetting("DataPrecision", 4, Text.translatable("mendedminecarts.data_precision.description"));
+	public static final BooleanSetting DISPLAY_CART_DATA_FUSE = new BooleanSetting("Fuse", false, Text.translatable("mendedminecarts.fuse.description"));
 
 
 	public static final SettingGroup DISPLAY_CART_DATA = addSetting(
@@ -80,7 +81,8 @@ public class MendedMinecartsMod implements ModInitializer {
 							DISPLAY_CART_DATA_WOBBLE,
 							DISPLAY_CART_DATA_RIDEABLE,
 							DISPLAY_CART_DATA_PRECISION,
-							DISPLAY_CART_DATA_POS_BINARY
+							DISPLAY_CART_DATA_POS_BINARY,
+							DISPLAY_CART_DATA_FUSE
 					)
 	);
 
@@ -94,8 +96,8 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting ROTATE_CART_TO_RAIL = addSetting(new BooleanSetting("RotateCartToRail", false, Text.translatable("mendedminecarts.rotate_cart_to_rail.description")));
 	public static final BooleanSetting EXPLODING_CART_FIX = addSetting(new BooleanSetting("ExplodeRailsFix", false, Text.translatable("mendedminecarts.explode_rail_fix.description")));
 	public static final BooleanSetting NO_CART_ITEM_CAP = addSetting(new BooleanSetting("NoCartItemCap", false, Text.translatable("mendedminecarts.no_cart_item_cap.description")));
-	public static final BooleanSetting LAVA_CAULDRON_KILLS_TNT_CART = addSetting(new BooleanSetting("LavaCauldonKillsTNTCarts", false, Text.translatable("mendedminecarts.lava_cauldron_kills_tnt_carts")));
-	public static final BooleanSetting RAIL_PLACEMENT = addSetting(new BooleanSetting("RailPlacement", false, Text.translatable("mendedminecarts.rail_placement")));
+	public static final BooleanSetting LAVA_CAULDRON_KILLS_TNT_CART = addSetting(new BooleanSetting("LavaCauldonKillsTNTCarts", false, Text.translatable("mendedminecarts.lava_cauldron_kills_tnt_carts.description")));
+	public static final BooleanSetting RAIL_PLACEMENT = addSetting(new BooleanSetting("RailPlacement", false, Text.translatable("mendedminecarts.rail_placement.description")));
 
 	@Override
 	public void onInitialize() {
