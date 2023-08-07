@@ -22,7 +22,7 @@ public class ItemStackMixin_ItemCap {
     private void readCustomCount(NbtCompound nbt, CallbackInfo ci) {
         if (MendedMinecartsMod.NO_CART_ITEM_CAP.isEnabled()) {
             if (nbt.contains("CustomCount")) {
-            this.count = nbt.getInt("CustomCount");
+                this.count = nbt.getInt("CustomCount");
             }
         }
     }
@@ -33,7 +33,7 @@ public class ItemStackMixin_ItemCap {
     private void writeCustomCount(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir) {
         if (MendedMinecartsMod.NO_CART_ITEM_CAP.isEnabled()) {
             if (this.count != (byte)this.count) {
-            nbt.putInt("CustomCount", this.count);
+                nbt.putInt("CustomCount", this.count);
             }
         }
     }

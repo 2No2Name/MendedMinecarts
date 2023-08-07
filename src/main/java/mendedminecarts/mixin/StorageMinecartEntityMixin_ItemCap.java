@@ -1,7 +1,6 @@
 package mendedminecarts.mixin;
 
 import mendedminecarts.MendedMinecartsMod;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.StorageMinecartEntity;
 import net.minecraft.entity.vehicle.VehicleInventory;
 import net.minecraft.item.ItemStack;
@@ -15,9 +14,6 @@ public abstract class StorageMinecartEntityMixin_ItemCap implements VehicleInven
         if (MendedMinecartsMod.NO_CART_ITEM_CAP.isEnabled()) {
             this.generateInventoryLoot(null);
             this.getInventory().set(slot, stack);
-            if (!stack.isEmpty() && stack.getCount() > this.getMaxCountPerStack()) {
-                stack.setCount(this.getMaxCountPerStack());
-            }
         } else {
             //Copypaste from VehicleInventory
             this.generateInventoryLoot(null);
