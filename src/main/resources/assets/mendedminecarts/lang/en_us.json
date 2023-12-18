@@ -48,5 +48,6 @@
   "mendedminecarts.lava_cauldron_kills_tnt_carts.description": "Lava cauldrons don't make TNT carts explode.",
   "mendedminecarts.rail_placement.description": "Better rail placement when player is sneaking. Sloped rails like top slabs, curved rails when clicking in the corner of a block.",
   "mendedminecarts.fuse.description": "Displays the fuse time of TNT minecarts.",
-  "mendedminecarts.fuse": "Fuse"
+  "mendedminecarts.fuse": "Fuse",
+  "mendedminecarts.visual_hopper_cart_locking.description": "Locked hopper carts have locked hopper blocks inside them. Requires a texture pack to make visible."
 }

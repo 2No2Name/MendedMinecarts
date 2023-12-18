@@ -98,6 +98,7 @@ public class MendedMinecartsMod implements ModInitializer {
 	public static final BooleanSetting NO_CART_ITEM_CAP = addSetting(new BooleanSetting("NoCartItemCap", false, Text.translatable("mendedminecarts.no_cart_item_cap.description")));
 	public static final BooleanSetting LAVA_CAULDRON_KILLS_TNT_CART = addSetting(new BooleanSetting("LavaCauldonKillsTNTCarts", false, Text.translatable("mendedminecarts.lava_cauldron_kills_tnt_carts.description")));
 	public static final BooleanSetting RAIL_PLACEMENT = addSetting(new BooleanSetting("RailPlacement", false, Text.translatable("mendedminecarts.rail_placement.description")));
+	public static final BooleanSetting VISUAL_HOPPER_CART_LOCKING = addSetting(new BooleanSetting("VisualHopperCartLocking", false, Text.translatable("mendedminecarts.visual_hopper_cart_locking.description")));
 
 	@Override
 	public void onInitialize() {
